@@ -9,3 +9,11 @@ div.error{
 	color:red;
 	text-align: center;
 }
+
+.auth-group {
+	display:flex;
+}
+
+.auth-group button {
+	margin: 10px;
+}

@@ -14,6 +14,19 @@ class Dashboard extends React.Component{
 		return(
 			<div>
 				<h1> Hello {this.state.auth.user.name} </h1>
+				<div className="profile-mail">
+					<h2> Your Profile</h2>
+					<div className="profile-area">
+						<ul className="profile-list">
+							<li>
+								Email: {this.state.auth.user.email}
+							</li>
+							<li>
+								Name: {this.state.auth.user.name}
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		)
 	}

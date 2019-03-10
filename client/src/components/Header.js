@@ -3,6 +3,7 @@ import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstr
 import {AuthConsumer} from '../Contexts/AuthContext'
 import {Link} from 'react-router-dom'
 import LoginModal from './Modal/LoginModal'
+import RegisterModal from './Modal/RegisterModal'
 class Header extends React.Component{
 	constructor(){
 		super()
@@ -39,7 +40,10 @@ class Header extends React.Component{
 				              </button>
 				            </div>
 				          ) : (
-				            <LoginModal />
+				          	<div className="auth-group">
+					          	<RegisterModal />
+					            <LoginModal />
+				            </div>
 				          )}
 				        </div>
 				      )}

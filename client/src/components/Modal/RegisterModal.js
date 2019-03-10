@@ -12,10 +12,12 @@ class RegisterModal extends React.Component{
 
 		this.state = {
 			show:false,
-			username: "",
+			email: "",
 			password: "",
+			confirm: "",
 			name: "",
-			error: false		}
+			error: false,
+			canSubmit: true		}
 	}
 
 	handleClose() {
@@ -27,29 +29,45 @@ class RegisterModal extends React.Component{
 	}
 	handleChange(event){
 		const {name, value} = event.target
-		this.setState({[name]: value})
+		this.setState({[name]: value}, () =>{
+			if(this.state.password != this.state.confirm){
+				this.setState({
+					error: "Password confirmation must match",
+					canSubmit: false
+				})
+			}else if(this.state.error){
+				this.setState({error: false, canSubmit: true})
+			}
+		})
 	}
 
 	handleSubmit(){
 		const data = {
-			email: this.state.username,
-			password: this.state.password
+			email: this.state.email,
+			password: this.state.password,
+			name: this.state.name
 		}
-		this.context.login(data)
-		.then(res => {
-			this.setState({error: res.error})
-		})
+		if(this.state.canSubmit){
+			this.context.register(data)
+			.then(res => {
+				this.setState({error: res.error})
+			})
+		}else{
+			this.setState({
+				error: "cannot register with incorrect form"
+			})
+		}
 	}
 	render(){
 		return(
 			<div>
 		        <Button onClick={this.handleShow}>
-		          Login
+		          Register
 		        </Button>
 
 		        <Modal show={this.state.show} onHide={this.handleClose}>
 		          <Modal.Header closeButton>
-		            <Modal.Title>Log in</Modal.Title>
+		            <Modal.Title>Sign Up!</Modal.Title>
 		          </Modal.Header>
 		          <Modal.Body>
 		          	<form>
@@ -57,8 +75,16 @@ class RegisterModal extends React.Component{
 			          		<label>Email </label>
 			          		<input className="form-control"
 			          		type="text"
-			          		name="username"
-			          		value={this.state.username}
+			          		name="email"
+			          		value={this.state.email}
+			          		onChange={this.handleChange}/>
+		          		</div>
+		          		<div className="form-group">
+			          		<label>Name </label>
+			          		<input className="form-control"
+			          		type="text"
+			          		name="name"
+			          		value={this.state.name}
 			          		onChange={this.handleChange}/>
 		          		</div>
 		          		<div className="form-group">
@@ -69,7 +95,14 @@ class RegisterModal extends React.Component{
 			          		value={this.state.password}
 			          		onChange={this.handleChange}/>
 		          		</div>
-
+		          		<div className="form-group">
+			          		<label>confirm password </label>
+			          		<input className="form-control"
+			          		type="password"
+			          		name="confirm"
+			          		value={this.state.confirm}
+			          		onChange={this.handleChange}/>
+		          		</div>
 		          		<div className="error">
 		          			{this.state.error?
 		          				<span> {this.state.error} </span>
@@ -82,7 +115,7 @@ class RegisterModal extends React.Component{
 		              Close
 		            </Button>
 		            <Button variant="primary" onClick={this.handleSubmit}>
-		              Log In
+		              Sign up
 		            </Button>
 		          </Modal.Footer>
 		        </Modal>
