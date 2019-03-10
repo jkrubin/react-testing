@@ -8,7 +8,8 @@ module.exports = {
 		const schema = {
 			email: Joi.string().email(),
 			password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/),
-			admin: Joi.number().integer().min(0).max(1)
+			admin: Joi.number().integer().min(0).max(1),
+			name: Joi.string(),
 		}
 		const {error, value} = Joi.validate(req.body, schema)
 		if(error) {

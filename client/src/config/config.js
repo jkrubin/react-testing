@@ -1,0 +1,1 @@
+export const api = 'http://18.218.156.126:8081'
