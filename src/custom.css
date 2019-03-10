@@ -1,0 +1,9 @@
+a.float-right{
+	color:green;
+	float:right !important;
+}
+
+div.error{
+	color:red;
+	text-align: center;
+}
