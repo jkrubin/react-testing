@@ -131,6 +131,7 @@ module.exports = {
 		}
 		jwt.verify(token, config.authentication.jwtSecret, async function(err, token){
 			if(err){
+				console.log(err)
 				return res.status(500).send({message: 'Invalid Account'})
 			}else{
 				const tmpuser = await users.findById(token.id)
