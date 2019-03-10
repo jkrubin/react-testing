@@ -2,7 +2,9 @@ a.float-right{
 	color:green;
 	float:right !important;
 }
-
+header{
+	padding-bottom: 20px;
+}
 div.error{
 	color:red;
 	text-align: center;
