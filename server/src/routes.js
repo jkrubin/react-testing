@@ -20,7 +20,7 @@ module.exports = (app) => {
 
 	//Events endpoints
 		app.post('/createEvent',
-			AuthenticationController.matchUserToken,
+			//AuthenticationController.matchUserToken,
 			EventsController.createEvent)
 		app.post('/getEventById',
 			EventsController.getEventById)
