@@ -1,9 +1,9 @@
-const {event} = require('../models')
+const {Event} = require('../models')
 
 module.exports = {
 	async createEvent(req, res) {
 		try{
-			const newEvent = await event.create(req.body)
+			const newEvent = await Event.create(req.body)
 			res.send({event: newEvent})
 		}catch(err){
 			console.log(err)
@@ -15,7 +15,7 @@ module.exports = {
 	async getEventById(req, res) {
 		try{
 			const{id} = req.body
-			const tempEvent = await event.findOne({
+			const tempEvent = await Event.findOne({
 				where: {id: id}
 			})
 			res.send({tempEvent})
@@ -29,7 +29,7 @@ module.exports = {
 	async getEventByUser(req, res) {
 		try{
 			const{userId} = req.body
-			const tempEvent = await event.findOne({
+			const tempEvent = await Event.findOne({
 				where: {userId: userId}
 			})
 			res.send({tempEvent})
@@ -43,7 +43,7 @@ module.exports = {
 	async updateEvent(req, res) {
 		try{
 			const {id, name, description, image, location} = req.body
-			const tempEvent = await event.findOne({where:{id: id}})
+			const tempEvent = await Event.findOne({where:{id: id}})
 			tempEvent.update({
 			    name: name,
 			    description: description,
@@ -62,7 +62,7 @@ module.exports = {
 	async deleteEvent(req, res){
 		try{
 			const {id} = req.body
-			const tempEvent = await event.findOne({
+			const tempEvent = await Event.findOne({
 				where:{
 					id: id
 				}
