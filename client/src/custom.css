@@ -17,3 +17,17 @@ div.error{
 .auth-group button {
 	margin: 10px;
 }
+
+div.card{
+	width: 330px;
+	padding-left:15px;
+	padding-right: 15px;
+	padding-top: 8px;
+	background-color: #bad0d4
+}
+div.col-md-auto{
+	margin-bottom:30px;
+}
+div.card img{
+	width:100%;
+}
