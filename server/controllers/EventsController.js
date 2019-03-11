@@ -18,6 +18,9 @@ module.exports = {
 			const tempEvent = await Event.findOne({
 				where: {id: id}
 			})
+			if(!tempEvent){
+				return res.status(400).send({error: "Event not found"})
+			}
 			res.send({tempEvent})
 		}catch(err){
 			console.log(err)
@@ -29,9 +32,12 @@ module.exports = {
 	async getEventByUser(req, res) {
 		try{
 			const{userId} = req.body
-			const tempEvent = await Event.findOne({
+			const tempEvent = await Event.findAll({
 				where: {userId: userId}
 			})
+			if(!tempEvent){
+				return res.status(400).send([])
+			}
 			res.send({tempEvent})
 		}catch(err){
 			console.log(err)
@@ -44,13 +50,16 @@ module.exports = {
 		try{
 			const {id, name, description, image, location} = req.body
 			const tempEvent = await Event.findOne({where:{id: id}})
+			if(!tempEvent){
+				res.status(400).send({error: "Event not found"})
+			}
 			tempEvent.update({
 			    name: name,
 			    description: description,
 			    image: image,
 			    location: location
 			}).then(function(){
-				res.send({evnet})
+				return res.send({evnet})
 			})
 		}catch(err){
 			console.log(err)
