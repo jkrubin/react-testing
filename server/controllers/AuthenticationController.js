@@ -3,32 +3,6 @@ const jwt = require('jsonwebtoken')
 const config = require('../config/authConfig')
 const fs = require('fs')
 
-function encode_base64(filename){
-  fs.readFile(path.join(__dirname,'/public/',filename),function(error,data){
-    if(error){
-      throw error;
-    }else{
-      var buf = Buffer.from(data);
-      var base64 = buf.toString('base64');
-      //console.log('Base64 of ddr.jpg :' + base64);
-      return base64;
-    }
-  });
-}
-function decode_base64(base64str , filename){
-
-  var buf = Buffer.from(base64str,'base64');
-
-  fs.writeFile(path.join(__dirname,'/public/',filename), buf, function(error){
-    if(error){
-      throw error;
-    }else{
-      console.log('File created from base64 string!');
-      return true;
-    }
-  });
-
-}
 function jwtSignUser (user) {
 	const ONE_WEEK = 60 * 60 * 24 * 7
 	return jwt.sign(user, config.authentication.jwtSecret, {
@@ -38,16 +12,40 @@ function jwtSignUser (user) {
 module.exports = {
 	async register(req, res) {
 		try{
-			let image = req.files.image
-			console.log(image.data)
-			
+			let image = false
+			try{
+				if(req.files.file){
+					image = req.files.file
+					//console.log(image.data)
+				}
+			}catch(err){
+				console.log(err)
+			}
 			const user = await users.create(req.body)
-			const userJson = user.toJSON()
-			res.send({
+			let userJson = user.toJSON()
+
+			if(image){
+				let encoded = image.data.toString('base64')
+				user.update({
+					profilePicture: encoded,
+					mimeType: image.mimetype
+				})
+				.then(() => {
+					userJson = user.toJSON()
+					let userSign = user.toJSON()
+					delete userSign.profilePicture
+					return res.send({
+						user: userJson,
+						token: jwtSignUser(userSign)
+					})
+				})
+			}
+			return res.send({
 				user: userJson,
 				token: jwtSignUser(userJson)
 			})
 		}catch(err){
+			console.log(err)
 			res.status(400).send({
 				error: "This Email is already in use"
 			})

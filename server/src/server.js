@@ -9,7 +9,7 @@ const app = express()
 app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
-app.use(fileupload())
+app.use(fileUpload())
 
 require('./routes')(app)
 app.get('/', (req, res) => res.send('Hello World!'))
@@ -23,7 +23,7 @@ sequelize
     console.error('Unable to connect to the database:', err);
   });
 
-sequelize.sync()
+sequelize.sync({force: true})
 	.then(() => {
 		app.listen(8081, () => console.log('API listening on port 8081!'))
 	})  
