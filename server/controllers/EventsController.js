@@ -13,7 +13,7 @@ module.exports = {
 	},
 	async getEventById(req, res) {
 		try{
-			const{id}
+			const{id} = req.body
 			const tempEvent = await event.findOne({
 				where: {id: id}
 			})
@@ -27,7 +27,7 @@ module.exports = {
 	},
 	async getEventByUser(req, res) {
 		try{
-			const{userId}
+			const{userId} = req.body
 			const tempEvent = await event.findOne({
 				where: {userId: userId}
 			})
