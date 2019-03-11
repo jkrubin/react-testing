@@ -6,6 +6,7 @@ module.exports = {
 			const newEvent = await event.create(req.body)
 			res.send({event: newEvent})
 		}catch(err){
+			console.log(err)
 			res.status(400).send({
 				error: "Server error creating event"
 			})
