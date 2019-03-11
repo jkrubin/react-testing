@@ -40,10 +40,12 @@ module.exports = {
 					})
 				})
 			}
-			return res.send({
-				user: userJson,
-				token: jwtSignUser(userJson)
-			})
+			else{
+				return res.send({
+					user: userJson,
+					token: jwtSignUser(userJson)
+				})
+			}
 		}catch(err){
 			console.log(err)
 			res.status(400).send({

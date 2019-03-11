@@ -25,7 +25,14 @@ module.exports = (sequelize, DataTypes) => {
       unique: true
     },
     password: DataTypes.STRING,
-    profilePicture: DataTypes.BLOB,
+    profilePicture: {
+      type: DataTypes.BLOB,
+      get(){
+	if(this.getDataValue('profilePicture')){
+     	  return this.getDataValue('profilePicture').toString()
+	}
+      },
+    },
     mimeType: DataTypes.STRING,
     bio: DataTypes.STRING,
     admin: DataTypes.BOOLEAN
