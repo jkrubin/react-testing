@@ -1,10 +1,11 @@
 const AuthenticationController = require('../controllers/AuthenticationController')
+const EventsController = require('../controllers/EventsController')
 const AuthenticationControllerPolicy = require('../policies/AuthenticationControllerPolicy')
 module.exports = (app) => {
 
 	app.get('/route', (req, res) => res.send('routes'))
 
-	//Users edpoint
+	//Users endpoints
 		//Register User
 		app.post('/register',
 			AuthenticationControllerPolicy.register,
@@ -17,4 +18,16 @@ module.exports = (app) => {
 			AuthenticationController.matchUserToken,
 			AuthenticationController.updateUser)
 
+	//Events endpoints
+		app.post('/createEvent',
+			AuthenticationController.matchUserToken,
+			EventsController.createEvent)
+		app.post('/getEventById',
+			EventsController.getEventById)
+		app.post('/getEventByUser',
+			EventsController.getEventByUser)
+		app.post('/updateEvent',
+			EventsController.updateEvent)
+		app.post('/deleteEvent',
+			EventsController.deleteEvent)
 }
