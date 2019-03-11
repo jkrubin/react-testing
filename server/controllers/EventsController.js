@@ -59,7 +59,7 @@ module.exports = {
 			    image: image,
 			    location: location
 			}).then(function(){
-				return res.send({evnet})
+				return res.send({tempEvent})
 			})
 		}catch(err){
 			console.log(err)
