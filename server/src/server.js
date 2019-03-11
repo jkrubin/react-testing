@@ -3,11 +3,13 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
 const {sequelize} = require('../models')
+const fileUpload = require('express-fileupload')
 
 const app = express()
 app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
+app.use(fileupload())
 
 require('./routes')(app)
 app.get('/', (req, res) => res.send('Hello World!'))
