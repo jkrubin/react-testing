@@ -46,10 +46,7 @@ class AuthProvider extends React.Component{
 	async register(data){
 		return fetch(api + '/register', {
 			method: "POST",
-			headers:{
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify(data)
+			body: data
 		})
 		.then(res => res.json())
 		.then((data) => {

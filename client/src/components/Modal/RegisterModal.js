@@ -9,6 +9,7 @@ class RegisterModal extends React.Component{
 		this.handleClose = this.handleClose.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleChange = this.handleChange.bind(this)
+		this.handleFile = this.handleFile.bind(this)
 
 		this.state = {
 			show:false,
@@ -16,6 +17,8 @@ class RegisterModal extends React.Component{
 			password: "",
 			confirm: "",
 			name: "",
+			image: null,
+			loaded: 0,
 			error: false,
 			canSubmit: true		}
 	}
@@ -41,12 +44,22 @@ class RegisterModal extends React.Component{
 		})
 	}
 
+	handleFile(event){
+		this.setState({image: event.target.files[0]})
+	}
+
 	handleSubmit(){
-		const data = {
-			email: this.state.email,
-			password: this.state.password,
-			name: this.state.name
-		}
+		let data = new FormData()
+
+		data.append('email', this.state.email)
+		data.append('password', this.state.password)
+		data.append('name', this.state.name)
+		data.append('file', this.state.image, "profile.png")
+		// const data = {
+		// 	email: this.state.email,
+		// 	password: this.state.password,
+		// 	name: this.state.name
+		// }
 		if(this.state.canSubmit){
 			this.context.register(data)
 			.then(res => {
@@ -102,6 +115,13 @@ class RegisterModal extends React.Component{
 			          		name="confirm"
 			          		value={this.state.confirm}
 			          		onChange={this.handleChange}/>
+		          		</div>
+		          		<div className="form-group">
+		          			<label> Profile Picture </label>
+		          			<input className="form-control"
+		          			type="file"
+		          			name="image"
+		          			onChange={this.handleFile} />
 		          		</div>
 		          		<div className="error">
 		          			{this.state.error?
