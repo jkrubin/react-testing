@@ -33,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
   users.associate = function(models) {
+    users.hasMany(models.Event, {as: 'Event'})
   };
   users.prototype.comparePassword = function (enteredPass) {
     return bcrypt.compareAsync(enteredPass, this.password)
