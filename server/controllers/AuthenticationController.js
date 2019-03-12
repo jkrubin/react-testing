@@ -5,7 +5,13 @@ const fs = require('fs')
 
 function jwtSignUser (user) {
 	const ONE_WEEK = 60 * 60 * 24 * 7
-	return jwt.sign(user, config.authentication.jwtSecret, {
+	const userData = {
+		id: user.id,
+		name: user.name,
+		email: user.email,
+		admin: user.admin
+	}
+	return jwt.sign(userData, config.authentication.jwtSecret, {
 		expiresIn: ONE_WEEK
 	})
 }
@@ -32,11 +38,9 @@ module.exports = {
 				})
 				.then(() => {
 					userJson = user.toJSON()
-					let userSign = user.toJSON()
-					delete userSign.profilePicture
 					return res.send({
 						user: userJson,
-						token: jwtSignUser(userSign)
+						token: jwtSignUser(userJson)
 					})
 				})
 			}
@@ -121,10 +125,11 @@ module.exports = {
 		try{
 			const {id} = req.body
 			const user = await users.findOne({where:{id: id}})
-			const {name, email} = req.body
+			const {name, email, bio} = req.body
 			user.update({
 			    name: name,
-			    email: email
+			    email: email,
+			    bio: bio
 			}).then(function(){
 				res.send({user: user.toJSON()})
 			})
