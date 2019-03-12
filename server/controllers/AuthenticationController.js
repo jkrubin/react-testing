@@ -123,16 +123,40 @@ module.exports = {
 	},
 	async updateUser(req, res) {
 		try{
+			let image = false
+			try{
+				if(req.files.file){
+					image = req.files.file
+				}
+			}catch(err){
+				console.log(err)
+			}
+
 			const {id} = req.body
 			const user = await users.findOne({where:{id: id}})
 			const {name, email, bio} = req.body
-			user.update({
-			    name: name,
-			    email: email,
-			    bio: bio
-			}).then(function(){
-				res.send({user: user.toJSON()})
-			})
+
+			if(image){
+				let encoded = image.data.toString('base64')
+				user.update({
+					profilePicture: encoded,
+					mimeType: image.mimetype,
+					name: name,
+					email: email,
+					bio: bio
+				})
+				.then(() => {
+					return res.send({user: user.toJSON()})
+				})
+			}else{
+				user.update({
+				    name: name,
+				    email: email,
+				    bio: bio
+				}).then(function(){
+					res.send({user: user.toJSON()})
+				})
+			}
 		}catch(err){
 			console.log(err)
 			res.status(500).send({
