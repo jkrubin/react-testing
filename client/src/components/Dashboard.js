@@ -56,22 +56,12 @@ class Dashboard extends React.Component{
 		let eventGrid = this.state.events.map((event) => {
 			return <EventDisplay event={event}/>
 		})
-		let picture = this.state.auth.user.profilePicture
 		return(
 			<div>
 				<h1> Hello {this.state.auth.user.name} </h1>
 				<div className="profile-mail">
 					<Profile user={this.state.auth.user} token={this.state.auth.token} />
 					<div className="profile-area">
-						<ul className="profile-list">
-							<li>
-								Email: {this.state.auth.user.email}
-							</li>
-							<li>
-								Name: {this.state.auth.user.name}
-							</li>
-						</ul>
-						<img src={`data:${this.state.auth.user.mimeType};base64,${picture}`} />
 						<div className="events-table">
 							<h2> My Events </h2>
 							<div className="events-grid container">

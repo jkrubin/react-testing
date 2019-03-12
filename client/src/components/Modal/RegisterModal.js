@@ -1,6 +1,8 @@
 import React from "react"
 import {Modal, Button, Form} from 'react-bootstrap'
 import { AuthContext } from '../../Contexts/AuthContext'
+import { withRouter } from 'react-router-dom'
+
 class RegisterModal extends React.Component{
 	constructor(props){
 		super(props)
@@ -64,6 +66,9 @@ class RegisterModal extends React.Component{
 			this.context.register(data)
 			.then(res => {
 				this.setState({error: res.error})
+				if(!res.error){
+					this.props.history.push('/dashboard')
+				}
 			})
 		}else{
 			this.setState({
@@ -146,4 +151,4 @@ class RegisterModal extends React.Component{
 
 RegisterModal.contextType = AuthContext
 
-export default RegisterModal
+export default withRouter(RegisterModal)
