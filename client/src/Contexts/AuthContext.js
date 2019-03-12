@@ -15,6 +15,7 @@ class AuthProvider extends React.Component{
 		this.login = this.login.bind(this)
 		this.logout = this.logout.bind(this)
 		this.register = this.register.bind(this)
+		this.updateUser = this.updateUser.bind(this)
 	}
 
 	async login(data){
@@ -65,6 +66,32 @@ class AuthProvider extends React.Component{
 		.catch(error => console.log(error))			
 	}
 
+	async updateUser(data){
+		return fetch(api + '/updateUser', {
+				method: "POST",
+				headers: {
+					'x-access-token': this.state.auth.token
+				},
+				body: data
+			})
+			.then(res => res.json())
+			.then((data) => {
+				const auth = data
+				if(auth.error){
+					console.log({auth})
+					return auth
+				}else if(auth.user){
+					this.setState(prevState => ({
+						auth: {
+							...prevState.auth,
+							user: auth.user
+						}
+					}))
+					return true
+				}
+			})
+			.catch(error => console.log(error))	
+	}
 	logout(){
 		this.setState({isAuth: false, auth: null})
 	}
@@ -77,7 +104,8 @@ class AuthProvider extends React.Component{
 					auth: this.state.auth,
 					login: this.login,
 					logout: this.logout,
-					register: this.register
+					register: this.register,
+					updateUser: this.updateUser
 				} }
 			>
 			{this.props.children}

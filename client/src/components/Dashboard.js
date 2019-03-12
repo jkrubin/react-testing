@@ -2,6 +2,7 @@ import React from "react"
 import { AuthContext } from "../Contexts/AuthContext"
 import { api } from "../config/config"
 import EventDisplay from "./EventDisplay"
+import Profile from "./Profile"
 
 class Dashboard extends React.Component{
 	constructor(props, context){
@@ -11,10 +12,12 @@ class Dashboard extends React.Component{
 			token: false,
 			events: [],
 			error: "",
-			isLoading: false
+			isLoading: false,
 		}
 	}
-
+	componentWillReceiveProps(nextProps, nextContext) {
+		this.setState({auth: nextContext.auth})
+	}
 	componentDidMount(){
 		this.setState({
 			isLoading: true
@@ -58,7 +61,7 @@ class Dashboard extends React.Component{
 			<div>
 				<h1> Hello {this.state.auth.user.name} </h1>
 				<div className="profile-mail">
-					<h2> Your Profile</h2>
+					<Profile user={this.state.auth.user} token={this.state.auth.token} />
 					<div className="profile-area">
 						<ul className="profile-list">
 							<li>
