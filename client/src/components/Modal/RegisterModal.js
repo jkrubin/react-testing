@@ -1,5 +1,5 @@
 import React from "react"
-import {Modal, Button, Form} from 'react-bootstrap'
+import {Modal, Button} from 'react-bootstrap'
 import { AuthContext } from '../../Contexts/AuthContext'
 import { withRouter } from 'react-router-dom'
 
@@ -35,7 +35,7 @@ class RegisterModal extends React.Component{
 	handleChange(event){
 		const {name, value} = event.target
 		this.setState({[name]: value}, () =>{
-			if(this.state.password != this.state.confirm){
+			if(this.state.password !== this.state.confirm){
 				this.setState({
 					error: "Password confirmation must match",
 					canSubmit: false

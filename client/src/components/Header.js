@@ -1,5 +1,5 @@
 import React from "react"
-import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
+import {Navbar, Nav} from 'react-bootstrap'
 import {AuthConsumer} from '../Contexts/AuthContext'
 import {Link} from 'react-router-dom'
 import LoginModal from './Modal/LoginModal'
@@ -19,6 +19,7 @@ class Header extends React.Component{
 					src={require('../assets/testLogo.png')}
 					height='100'
 					width='100'
+					alt=""
 				/>
 				<Navbar.Brand >Test App</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />

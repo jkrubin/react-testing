@@ -1,5 +1,4 @@
 import React from "react"
-import { api } from "../config/config"
 import { AuthContext } from '../Contexts/AuthContext'
 
 class Profile extends React.Component{
@@ -39,10 +38,10 @@ class Profile extends React.Component{
 		})
 	}
 	handleSubmit(){
-		if(	this.state.name == this.state.originalUser.name &&
-			this.state.email == this.state.originalUser.email &&
-			this.state.bio == this.state.originalUser.bio &&
-			this.state.image == null)
+		if(	this.state.name === this.state.originalUser.name &&
+			this.state.email === this.state.originalUser.email &&
+			this.state.bio === this.state.originalUser.bio &&
+			this.state.image === null)
 		{
 			this.setState({error: "no fields have been updated"})
 			return null
@@ -77,7 +76,7 @@ class Profile extends React.Component{
 				<div className="card">
 					<div className="card-body">
 						<h5 className="card-title"> Profile: </h5>
-						<img src={`data:${this.state.mimeType};base64,${picture}`} />
+						<img src={`data:${this.state.mimeType};base64,${picture}`} alt="" className="profile-pic"/>
 						<form>
 		          		<div className="form-group">
 			          		<label>Email </label>

@@ -18,6 +18,9 @@ div.error{
 	margin: 10px;
 }
 
+img.profile-pic{
+	width: 100%;
+}
 div.card{
 	width: 330px;
 	padding-left:15px;
@@ -25,9 +28,77 @@ div.card{
 	padding-top: 8px;
 	background-color: #bad0d4
 }
+div.event-card{
+	width: 520px;
+	height: 700px;
+	padding-left: 15px;
+}
 div.col-md-auto{
 	margin-bottom:30px;
 }
-div.card img{
-	width:100%;
+
+.event-image-container{
+	position: relative;
+	width: 330px;
+	height: 300px;
+	overflow: hidden;
+}
+.event-image-container img{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  width: auto;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.flip-container {
+	perspective: 1000px;
+}
+/* flip the pane when hovered */
+.flip-container .flipper.flipped {
+	transform: rotateY(180deg);
+}
+
+.flip-container, .front, .back {
+	width: 330px;
+	display: inline-block;
+	height: auto;
+}
+
+/* flip speed goes here */
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+	height: auto;
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	backface-visibility: hidden;
+	position: absolute;
+	top:0;
+
+}
+
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+	left: 79px;
+}
+
+/* back, initially hidden pane */
+.back {
+	transform: rotateY(180deg);
+	position: absolute;
+	left: -79px;
+}
+
+button.event-revert, button.event-submit{
+	margin-left:15px;
+	margin-right: 15px;
 }
