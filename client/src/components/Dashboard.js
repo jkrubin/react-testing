@@ -15,12 +15,14 @@ class Dashboard extends React.Component{
 			error: "",
 			isLoading: false,
 			cardFlip: false,
-			activeCard: undefined
+			activeCard: undefined,
+			direction: null
 
 		}
 		this.submitEvent = this.submitEvent.bind(this)
 		this.newEventTemplate = this.newEventTemplate.bind(this)
 		this.cancelNewEvent = this.cancelNewEvent.bind(this)
+		this.handleSelect = this.handleSelect.bind(this)
 	}
 	componentWillReceiveProps(nextProps, nextContext) {
 		this.setState({auth: nextContext.auth})
@@ -60,7 +62,8 @@ class Dashboard extends React.Component{
 	}
 	submitEvent(event){
 		const {id, name, description, image, location, date, capacity} = event
-		const data = {id, name, description, image, location, date, capacity}
+		const data = {id, name, description, image, location, date, capacity, 
+			userId: this.state.auth.user.id}
 		return fetch(api + '/updateEvent', {
 			method: "POST",
 			headers:{
@@ -74,7 +77,7 @@ class Dashboard extends React.Component{
 			if(updatedEvent.error){
 				console.log({updatedEvent})
 				return ({error: updatedEvent.error})
-			}else if(updatedEvent){
+			}else if(updatedEvent.tempEvent){
 				this.setState((prevState) => {
 					let eventState = prevState.events.map((event) => {
 						if(updatedEvent.tempEvent.id === event.id){
@@ -85,6 +88,17 @@ class Dashboard extends React.Component{
 					return {events: eventState}
 				})
 				return true
+			}else if(updatedEvent.newEvent){
+				this.setState((prevState) =>{
+					let eventState = prevState.events.map((event) => {
+						if(event.id === 0){
+							event = updatedEvent.newEvent
+						}
+						return event
+					})
+					console.log("new event added")
+					return {events: eventState}			
+				})
 			}
 		})
 		.catch(error => console.log(error))	
@@ -100,7 +114,7 @@ class Dashboard extends React.Component{
 				date: undefined,
 				capacity: undefined
 			})
-			prevState.activeCard = prevState.events.length
+			prevState.activeCard = prevState.events.length - 1
 			return prevState
 		})
 	}
@@ -112,8 +126,23 @@ class Dashboard extends React.Component{
 			return prevState
 		})
 	}
-	render(){
 
+	handleSelect(selectedIndex, e) {
+		this.setState((prevState) =>{
+			if(prevState.events[prevState.activeCard].id === 0){
+				prevState.events.pop()
+			}
+			return {
+				activeCard: selectedIndex,
+				direction: e.direction,
+			}
+		});
+	}
+
+	render(){
+		if(this.state.events.length === 0){
+			this.newEventTemplate()
+		}
 		let eventGrid = this.state.events.map((event) => {
 			return(
 				<Carousel.Item>
@@ -132,12 +161,16 @@ class Dashboard extends React.Component{
 				<h1> Hello {this.state.auth.user.name} </h1>
 				<div className="container">
 					<div className="dash-area row">
-						<div className="profile-area col-md-auto">
+						<div className="profile-area col-lg">
 							<Profile user={this.state.auth.user} token={this.state.auth.token} />
 						</div>
-						<div className="events-area col-md-auto">
+						<div className="events-area col-lg">
 							<h2> My Events </h2>
-							<Carousel interval= {null} activeIndex={this.state.activeCard} >
+							<Carousel 
+								interval={null} 
+								activeIndex={this.state.activeCard}
+								direction={this.state.direction}
+								onSelect={this.handleSelect} >
 								{eventGrid}
 							</Carousel>
 						</div>

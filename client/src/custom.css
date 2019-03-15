@@ -22,14 +22,13 @@ img.profile-pic{
 	width: 100%;
 }
 div.card{
-	width: 330px;
 	padding-left:15px;
 	padding-right: 15px;
 	padding-top: 8px;
 	background-color: #bad0d4
 }
 div.event-card{
-	width: 520px;
+	width: 100%;
 	height: 700px;
 	padding-left: 15px;
 }
@@ -39,7 +38,7 @@ div.col-md-auto{
 
 .event-image-container{
 	position: relative;
-	width: 330px;
+	width: 100%;
 	height: 300px;
 	overflow: hidden;
 }
@@ -62,7 +61,6 @@ div.col-md-auto{
 }
 
 .flip-container, .front, .back {
-	width: 330px;
 	display: inline-block;
 	height: auto;
 }
@@ -79,7 +77,11 @@ div.col-md-auto{
 .front, .back {
 	backface-visibility: hidden;
 	position: absolute;
-	top:0;
+	top:15px;
+	width: 100%;
+	left:0px;
+	padding-left: 30px;
+	padding-right: 30px;
 
 }
 
@@ -88,17 +90,19 @@ div.col-md-auto{
 	z-index: 2;
 	/* for firefox 31 */
 	transform: rotateY(0deg);
-	left: 79px;
 }
 
 /* back, initially hidden pane */
 .back {
 	transform: rotateY(180deg);
 	position: absolute;
-	left: -79px;
 }
 
 button.event-revert, button.event-submit{
 	margin-left:15px;
 	margin-right: 15px;
+}
+
+.carousel-control-prev, .carousel-control-next{
+	max-width: 30px;
 }
