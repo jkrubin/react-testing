@@ -1,4 +1,5 @@
 const {Event} = require('../models')
+const {users} = require('../models')
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op
 module.exports = {
@@ -103,7 +104,8 @@ module.exports = {
 			const eventArr = await Event.findAll({
 				where: {
 					userId: {[Op.ne]: id}
-				}
+				},
+				include: [{model: users, as: 'userId'}]
 			})
 			if(!eventArr){
 				return res.status(400).send({error: "No events found"})
