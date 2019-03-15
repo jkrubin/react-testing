@@ -1,5 +1,6 @@
 const {Event} = require('../models')
-
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op
 module.exports = {
 	async createEvent(req, res) {
 		try{
@@ -94,6 +95,19 @@ module.exports = {
 			res.status(500).send({
 				error: "Failed to delete Event"
 			})
+		}
+	},
+	async getHomepageEvents(req, res){
+		try{
+			const {id} = req.body
+			const eventArr = await Event.findOne({
+				where: {
+					id: {[Op.ne]: id}
+				}
+			})
+		}catch(err){
+			console.log(err)
+			res.status(500).send({error: "Could not get Events"})
 		}
 	}
 
