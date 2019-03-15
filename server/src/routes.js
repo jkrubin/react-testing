@@ -30,4 +30,6 @@ module.exports = (app) => {
 			EventsController.updateEvent)
 		app.post('/deleteEvent',
 			EventsController.deleteEvent)
+		app.post('/getHomepageEvents',
+			EventsController.getHomepageEvents)
 }

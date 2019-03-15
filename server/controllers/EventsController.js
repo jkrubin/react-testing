@@ -100,11 +100,15 @@ module.exports = {
 	async getHomepageEvents(req, res){
 		try{
 			const {id} = req.body
-			const eventArr = await Event.findOne({
+			const eventArr = await Event.findAll({
 				where: {
-					id: {[Op.ne]: id}
+					userId: {[Op.ne]: id}
 				}
 			})
+			if(!eventArr){
+				return res.status(400).send({error: "No events found"})
+			}
+			res.send({eventArr})
 		}catch(err){
 			console.log(err)
 			res.status(500).send({error: "Could not get Events"})
