@@ -48,28 +48,29 @@ module.exports = {
 	},
 	async updateEvent(req, res) {
 		try{
-			const {id, name, description, image, location, data, capacity} = req.body
+			const {id, name, description, image, location, date, capacity} = req.body
 			const tempEvent = await Event.findOne({where:{id: id}})
 			if(!tempEvent){
 				try{
 					const newEvent = await Event.create(req.body)
-					res.send(tempEvent: newEvent)
+					return res.send({newEvent})
 
 				}catch(err){
 					console.log("err")
 					res.status(500).send({error: "could not create new event"})
 				}
+			}else{
+				tempEvent.update({
+				    name: name,
+				    description: description,
+				    image: image,
+				    location: location,
+				    date: date,
+				    capacity: capacity
+				}).then(function(){
+					return res.send({tempEvent})
+				})
 			}
-			tempEvent.update({
-			    name: name,
-			    description: description,
-			    image: image,
-			    location: location,
-			    date: date,
-			    capacity: capacity
-			}).then(function(){
-				return res.send({tempEvent})
-			})
 		}catch(err){
 			console.log(err)
 			res.status(500).send({
