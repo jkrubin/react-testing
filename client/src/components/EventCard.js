@@ -34,6 +34,7 @@ class EventCard extends React.Component{
 							<div className="event-bar">
 								<button onClick={this.flipCard}> Edit Event </button>
 								<button onClick={this.props.newEventTemplate}> Create New Event </button>
+								<button onClick={() => this.props.deleteEvent(this.state.event)}> Delete Event </button>
 							</div>
 							<EventDisplay event={this.state.event} />
 						</div>

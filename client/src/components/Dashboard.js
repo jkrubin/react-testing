@@ -23,6 +23,7 @@ class Dashboard extends React.Component{
 		this.newEventTemplate = this.newEventTemplate.bind(this)
 		this.cancelNewEvent = this.cancelNewEvent.bind(this)
 		this.handleSelect = this.handleSelect.bind(this)
+		this.deleteEvent = this.deleteEvent.bind(this)
 	}
 	componentWillReceiveProps(nextProps, nextContext) {
 		this.setState({auth: nextContext.auth})
@@ -103,6 +104,30 @@ class Dashboard extends React.Component{
 		})
 		.catch(error => console.log(error))	
 	}
+	deleteEvent(event){
+		const{id} = event
+		const data = {id: id}
+		return fetch(api + '/deleteEvent', {
+			method: "POST",
+			headers:{
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(data)
+		})
+		.then(res => {
+			console.log(res.status)
+			if(res.status === 200){
+				this.setState((prevState) => {
+					let eventsArr = prevState.events.filter((event) => id !== event.id)
+					return {events: eventsArr, activeCard: 0}
+				})
+			}
+			else{
+				console.log("error deleing")
+			}
+		})
+		.catch(error => console.log(error))	
+	}
 	newEventTemplate(){
 		this.setState((prevState) => {
 			prevState.events.push({
@@ -143,7 +168,9 @@ class Dashboard extends React.Component{
 		if(this.state.events.length === 0){
 			this.newEventTemplate()
 		}
+		console.log(this.state.events)
 		let eventGrid = this.state.events.map((event) => {
+			console.log(event)
 			return(
 				<Carousel.Item>
 					<EventCard 
@@ -152,10 +179,12 @@ class Dashboard extends React.Component{
 					key={event.id} 
 					cardFlip={(event.id > 0) ? false: true}
 					newEventTemplate={this.newEventTemplate}
-					cancelNewEvent ={this.cancelNewEvent} /> 
+					cancelNewEvent ={this.cancelNewEvent}
+					deleteEvent={this.deleteEvent} /> 
 				</Carousel.Item>
 			)
 		})
+		console.log(eventGrid)
 		return(
 			<div>
 				<h1> Hello {this.state.auth.user.name} </h1>

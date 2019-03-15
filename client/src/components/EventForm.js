@@ -21,7 +21,6 @@ class EventForm extends React.Component{
 	}
 
 	componentWillReceiveProps(nextProps){
-		console.log(nextProps)
 		if(nextProps.event){
 			this.setState({...nextProps.event})
 		}	
