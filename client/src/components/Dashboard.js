@@ -7,7 +7,7 @@ import {Carousel} from 'react-bootstrap'
 
 class Dashboard extends React.Component{
 	constructor(props, context){
-		super()
+		super(props, context)
 		this.state = {
 			auth: context.auth,
 			token: false,
@@ -168,9 +168,7 @@ class Dashboard extends React.Component{
 		if(this.state.events.length === 0){
 			this.newEventTemplate()
 		}
-		console.log(this.state.events)
 		let eventGrid = this.state.events.map((event) => {
-			console.log(event)
 			return(
 				<Carousel.Item>
 					<EventCard 
@@ -184,7 +182,6 @@ class Dashboard extends React.Component{
 				</Carousel.Item>
 			)
 		})
-		console.log(eventGrid)
 		return(
 			<div>
 				<h1> Hello {this.state.auth.user.name} </h1>

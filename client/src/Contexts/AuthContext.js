@@ -8,8 +8,9 @@ class AuthProvider extends React.Component{
 		this.state = {
 			isAuth: false,
 			auth: {
-				id: 1,
-				username: "Josh"
+				user:{
+					id: 0
+				}
 			}
 		}
 		this.login = this.login.bind(this)

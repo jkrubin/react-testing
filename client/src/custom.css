@@ -32,6 +32,11 @@ div.event-card{
 	height: 700px;
 	padding-left: 15px;
 }
+
+div.homepage-events{
+	width:100%;
+	height: 700px;
+}
 div.col-md-auto{
 	margin-bottom:30px;
 }
