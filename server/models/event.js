@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     capacity: DataTypes.INTEGER
   }, {});
   Event.associate = function(models) {
-    Event.belongsTo(models.users)
+    Event.belongsTo(models.users, {foreignKey:'userId', as: 'users'})
   };
   return Event;
 };

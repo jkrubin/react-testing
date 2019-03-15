@@ -105,7 +105,7 @@ module.exports = {
 				where: {
 					userId: {[Op.ne]: id}
 				},
-				include: [{model: users, as: 'userId'}]
+				include: [{model: users, as: 'users'}]
 			})
 			if(!eventArr){
 				return res.status(400).send({error: "No events found"})
