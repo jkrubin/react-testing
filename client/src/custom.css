@@ -10,6 +10,9 @@ div.error{
 	text-align: center;
 }
 
+/*
+	Dash page
+*/
 .auth-group {
 	display:flex;
 }
@@ -57,6 +60,10 @@ div.col-md-auto{
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
+
+/*
+	Flip container
+*/
 .flip-container {
 	perspective: 1000px;
 }
@@ -110,4 +117,19 @@ button.event-revert, button.event-submit{
 
 .carousel-control-prev, .carousel-control-next{
 	max-width: 30px;
+}
+/*
+	homepage
+*/
+
+.event-profile-pic{
+	height: 250px;
+	width: auto;
+}
+
+.event-user-area{
+	display: inline-block;
+}
+.user-bio{
+	padding-bottom :45px;
 }

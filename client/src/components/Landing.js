@@ -1,7 +1,7 @@
 import React from "react"
 import { AuthContext } from "../Contexts/AuthContext"
 import { api } from "../config/config"
-import EventDisplay from "./EventDisplay"
+import EventHomepage from "./EventHomepage"
 import {Carousel} from 'react-bootstrap'
 
 class Landing extends React.Component{
@@ -54,7 +54,7 @@ class Landing extends React.Component{
 			return(
 				<Carousel.Item>
 					<div className = "card">
-						<EventDisplay event={event} /> 
+						<EventHomepage event={event} /> 
 					</div>
 				</Carousel.Item>
 			)
