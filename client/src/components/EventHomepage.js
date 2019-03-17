@@ -1,11 +1,88 @@
 import React from "react"
+import { api } from "../config/config"
 
 class EventHomepage extends React.Component{
 	constructor(props){
 		super()
 		this.state = {
-			...props.event
+			...props.event,
+			userId: props.userId,
+			isLoading: false,
+			error: false,
 		}
+		this.submitLike = this.submitLike.bind(this)
+		this.deleteLike = this.deleteLike.bind(this)
+	}
+	submitLike(){
+		this.setState({
+			isLoading: true
+		})
+		let data = {
+			userId: this.state.userId,
+			EventId: this.state.id
+		}
+		fetch(api + '/createLike', {
+			method: "POST",
+			headers:{
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(data)
+		})
+		.then(res => res.json())
+		.then((data) => {
+			const like = data
+			console.log(like)
+			if(like.error){
+				this.setState({
+					error: like.error,
+					isLoading: false
+				})
+			}else if(like.like){
+				this.setState((prevState) =>{
+					prevState.likes.push(like.like)
+					prevState.isLoading = false
+					return prevState
+				})
+			}
+		})
+		.catch(error => {
+			this.setState({error: error, isLoading: false})
+		})	
+	}
+	deleteLike(){
+		this.setState({
+			isLoading: true
+		})
+		let data = {
+			id: this.state.likes[0].id
+		}
+		fetch(api + '/deleteLike', {
+			method: "POST",
+			headers:{
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(data)
+		})
+		.then(res => res.json())
+		.then((data) => {
+			const like = data
+			console.log(like)
+			if(like.error){
+				this.setState({
+					error: like.error,
+					isLoading: false
+				})
+			}else if(like.message){
+				this.setState((prevState) =>{
+					prevState.likes.pop()
+					prevState.isLoading = false
+					return prevState
+				})
+			}
+		})
+		.catch(error => {
+			this.setState({error: error, isLoading: false})
+		})	
 	}
 	render(){
 		return(
@@ -19,6 +96,13 @@ class EventHomepage extends React.Component{
 					<ul className="list-group list-group-flush">
 						<li className="list-group-item"> Location: {this.state.location} </li>
 					</ul>
+					<p className="card-text"> 
+						{ (this.state.userId !== 0) && (
+							this.state.likes.length === 0 ?
+								(<button type="button" className="btn btn-primary" onClick={this.submitLike}> heart this event! </button>)
+								:(<button type="button" className="btn btn-primary" onClick={this.deleteLike}> You like this Event </button>)
+						)} 
+					</p>
 				</div>
 				<div className="user-bio card-body">
 					<h5 className="card-title"> Submitted by</h5>

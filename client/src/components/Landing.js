@@ -54,7 +54,7 @@ class Landing extends React.Component{
 			return(
 				<Carousel.Item>
 					<div className = "card homepage-card">
-						<EventHomepage event={event} /> 
+						<EventHomepage event={event} userId={this.state.auth.user.id} /> 
 					</div>
 				</Carousel.Item>
 			)

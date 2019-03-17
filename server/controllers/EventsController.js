@@ -82,6 +82,25 @@ module.exports = {
 	},
 	async updateEvent(req, res) {
 		try{
+			let image = false
+			try{
+				if(req.files.file){
+					image = req.files.file
+				}
+				if(image){
+					let encoded = image.data.toString('base64')
+					imgur.uploadBase64(encoded)
+						.then((json) => {
+							console.log(json.data.link)
+						})
+						.catch((err) => {
+							console.log(err.message)
+						})
+				}
+			}catch(err){
+				console.log(err)
+			}
+
 			const {id, name, description, image, location, date, capacity} = req.body
 			const tempEvent = await Event.findOne({
 				where:{id: id},
