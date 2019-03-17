@@ -65,7 +65,9 @@ module.exports = {
 				where:{id: id},
 				include: [{
 					model: Like, as: 'likes',
-					include: [{model: users, as: 'user'}]
+					include: [{
+						model: users, as: 'user'
+					}]
 				}]
 
 			})
@@ -122,7 +124,15 @@ module.exports = {
 				where: {
 					userId: {[Op.ne]: id}
 				},
-				include: [{model: users, as: 'users'}]
+				include: [
+					{model: users, as: 'users'},
+					{
+						model: Like, 
+						as: 'likes', 
+						where:{userId: id},
+						required: false
+					}
+				]
 			})
 			if(!eventArr){
 				return res.status(400).send({error: "No events found"})
