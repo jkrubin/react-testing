@@ -1,7 +1,7 @@
 import React from "react"
 import { AuthContext } from "../Contexts/AuthContext"
 import { api } from "../config/config"
-import EventDisplay from "./EventDisplay"
+import EventHomepage from "./EventHomepage"
 import {Carousel} from 'react-bootstrap'
 
 class Landing extends React.Component{
@@ -53,18 +53,24 @@ class Landing extends React.Component{
 		let eventGrid = this.state.events.map((event) => {
 			return(
 				<Carousel.Item>
-					<div className = "card">
-						<EventDisplay event={event} /> 
+					<div className = "card homepage-card">
+						<EventHomepage event={event} /> 
 					</div>
 				</Carousel.Item>
 			)
 		})
 		return(
-			<div className="container">
-				<h1> User Landing </h1>
+			<div className="landing-page">
+				<div className="container">
+					<h1> User Landing </h1>
+				</div>
 				<Carousel interval = {null}>
 					{eventGrid}
 				</Carousel>
+				<div className="container">
+					<h1> More content </h1>
+					<div style={{height: '400px'}}> content </div>
+				</div>
 			</div>
 		)
 	}
