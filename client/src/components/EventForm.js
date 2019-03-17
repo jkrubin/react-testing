@@ -111,7 +111,10 @@ class EventForm extends React.Component{
 	          		</div> 
 	          	</form>
 	          	<button type="button" className="btn btn-primary event-revert" onClick={this.revert}> Cancel Edit </button>
-	          	<button type="button" className="btn btn-primary event-submit" onClick={this.handleSubmit}> Create Event! </button>
+	          	{this.state.id === 0 ? 
+	          		(<button type="button" className="btn btn-primary event-submit" onClick={this.handleSubmit}> Create Event! </button>)
+	          		: (<button type="button" className="btn btn-primary event-submit" onClick={this.handleSubmit}> Update Event </button>)
+	          	}
 			</div>
 		)
 	}

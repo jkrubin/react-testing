@@ -1,9 +1,5 @@
-a.float-right{
-	color:green;
-	float:right !important;
-}
+
 header{
-	padding-bottom: 20px;
 }
 div.error{
 	color:red;
@@ -28,7 +24,10 @@ div.card{
 	padding-left:15px;
 	padding-right: 15px;
 	padding-top: 8px;
-	background-color: #bad0d4
+	background-color: #49d1ce
+}
+div.landing-page{
+	background-color: #daefef;
 }
 div.event-card{
 	width: 100%;
@@ -132,4 +131,19 @@ button.event-revert, button.event-submit{
 }
 .user-bio{
 	padding-bottom :45px;
+}
+
+.homepage-card{
+	/*max-width: 750px;*/
+	min-width: 300px;
+}
+
+.carousel-item.active.carousel-item{
+	display: flex;
+	justify-content: space-around;
+}
+
+.landing-page .carousel-inner{
+	background-color: black;
+	z-index: 0;
 }

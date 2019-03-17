@@ -53,18 +53,24 @@ class Landing extends React.Component{
 		let eventGrid = this.state.events.map((event) => {
 			return(
 				<Carousel.Item>
-					<div className = "card">
+					<div className = "card homepage-card">
 						<EventHomepage event={event} /> 
 					</div>
 				</Carousel.Item>
 			)
 		})
 		return(
-			<div className="container">
-				<h1> User Landing </h1>
+			<div className="landing-page">
+				<div className="container">
+					<h1> User Landing </h1>
+				</div>
 				<Carousel interval = {null}>
 					{eventGrid}
 				</Carousel>
+				<div className="container">
+					<h1> More content </h1>
+					<div style={{height: '400px'}}> content </div>
+				</div>
 			</div>
 		)
 	}
