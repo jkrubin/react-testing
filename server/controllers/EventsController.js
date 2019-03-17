@@ -41,7 +41,11 @@ module.exports = {
 		try{
 			const{userId} = req.body
 			const tempEvent = await Event.findAll({
-				where: {userId: userId}
+				where: {userId: userId},
+				include: [{
+					model: Like, as: 'likes',
+					include: [{model: users, as: 'user'}]
+				}]
 			})
 			if(!tempEvent){
 				return res.status(400).send([])
@@ -57,7 +61,14 @@ module.exports = {
 	async updateEvent(req, res) {
 		try{
 			const {id, name, description, image, location, date, capacity} = req.body
-			const tempEvent = await Event.findOne({where:{id: id}})
+			const tempEvent = await Event.findOne({
+				where:{id: id},
+				include: [{
+					model: Like, as: 'likes',
+					include: [{model: users, as: 'user'}]
+				}]
+
+			})
 			if(!tempEvent){
 				try{
 					const newEvent = await Event.create(req.body)
