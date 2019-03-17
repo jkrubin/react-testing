@@ -21,7 +21,7 @@ module.exports = {
 			const{id} = req.body
 			const tempEvent = await Event.findOne({
 				where: {id: id},
-				include: [{model: Like}]
+				include: [{model: Like, as: 'likes'}]
 			})
 			if(!tempEvent){
 				return res.status(400).send({error: "Event not found"})

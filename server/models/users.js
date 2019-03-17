@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   users.associate = function(models) {
     users.hasMany(models.Event, {as: 'Event'})
-    //users.hasMany(models.Like, {as: 'likes'})
+    users.hasMany(models.Like, {as: 'likes'})
   };
   users.prototype.comparePassword = function (enteredPass) {
     return bcrypt.compareAsync(enteredPass, this.password)
