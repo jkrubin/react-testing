@@ -62,15 +62,23 @@ class Dashboard extends React.Component{
 		})	
 	}
 	submitEvent(event){
-		const {id, name, description, image, location, date, capacity} = event
-		const data = {id, name, description, image, location, date, capacity, 
-			userId: this.state.auth.user.id}
+		const {id, name, description, eventImage, location, date, capacity} = event
+
+		let data = new FormData()
+
+		data.append('id', id)
+		data.append('name', name)
+		data.append('description', description)
+		data.append('location', location)
+		data.append('date', date)
+		data.append('capacity', capacity)
+		data.append('userId', this.state.auth.user.id)
+		if(eventImage != null){
+			data.append('file', eventImage, "profile.png")			
+		}
 		return fetch(api + '/updateEvent', {
 			method: "POST",
-			headers:{
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify(data)
+			body: data
 		})
 		.then(res => res.json())
 		.then((data) => {

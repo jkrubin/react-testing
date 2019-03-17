@@ -94,7 +94,14 @@ class AuthProvider extends React.Component{
 			.catch(error => console.log(error))	
 	}
 	logout(){
-		this.setState({isAuth: false, auth: null})
+		this.setState({
+			isAuth: false,
+			auth: {
+				user:{
+					id: 0
+				}
+			}
+		})
 	}
 
 	render(){
