@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     message: DataTypes.STRING
   }, {});
   Like.associate = function(models) {
-    // associations can be defined here
+    Like.belongsTo(models.users, {foreignKey:'userId', as: 'user'})
+    Like.belongsTo(models.Event, {foreignKey: 'eventId', as: 'event'})
   };
   return Like;
 };
