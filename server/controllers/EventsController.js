@@ -4,9 +4,31 @@ const {Like} = require('../models')
 
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op
+
+let imgur = require('imgur')
+imgur.setClientId('748f0fe4b93fa76')
+imgur.setAPIUrl('https://api.imgur.com/3/');
 module.exports = {
 	async createEvent(req, res) {
 		try{
+			let image = false
+			try{
+				if(req.files.file){
+					image = req.files.file
+				}
+				if(image){
+					let encoded = image.data.toString('base64')
+					imgur.uploadBase64(encoded)
+						.then((json) => {
+							console.log(json.data.link)
+						})
+						.catch((err) => {
+							console.log(err.message)
+						})
+				}
+			}catch(err){
+				console.log(err)
+			}
 			const newEvent = await Event.create(req.body)
 			res.send({event: newEvent})
 		}catch(err){

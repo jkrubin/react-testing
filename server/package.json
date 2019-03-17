@@ -15,6 +15,7 @@
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "express-fileupload": "^1.1.2-alpha.1",
+    "imgur": "^0.3.1",
     "iplocation": "^5.0.1",
     "joi": "^13.6.0",
     "jsonexport": "^2.3.0",
