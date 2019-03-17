@@ -1,5 +1,7 @@
 const {Event} = require('../models')
 const {users} = require('../models')
+const {Like} = require('../models')
+
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op
 module.exports = {
@@ -18,7 +20,8 @@ module.exports = {
 		try{
 			const{id} = req.body
 			const tempEvent = await Event.findOne({
-				where: {id: id}
+				where: {id: id},
+				include: [{model: Like}]
 			})
 			if(!tempEvent){
 				return res.status(400).send({error: "Event not found"})

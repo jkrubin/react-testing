@@ -1,5 +1,6 @@
 const AuthenticationController = require('../controllers/AuthenticationController')
 const EventsController = require('../controllers/EventsController')
+const LikesController = require('../controllers/LikesController')
 const AuthenticationControllerPolicy = require('../policies/AuthenticationControllerPolicy')
 module.exports = (app) => {
 
@@ -32,4 +33,10 @@ module.exports = (app) => {
 			EventsController.deleteEvent)
 		app.post('/getHomepageEvents',
 			EventsController.getHomepageEvents)
+
+	//Like endpoints
+		app.post('/createLike',
+			LikesController.createLike)
+		app.post('/deleteLike',
+			LikesController.deleteLike)
 }
