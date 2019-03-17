@@ -11,6 +11,8 @@ class EventForm extends React.Component{
 			eventImage: null,
 			isLoading: false
 		}
+		//let newDate = new Date(this.state.date).toISOString().slice(0,10)
+		//console.log(newDate)
 		if(!this.state.date){
 			this.state.date = undefined
 		}
@@ -61,6 +63,10 @@ class EventForm extends React.Component{
 	}
 
 	render(){
+		let displayDate = this.state.date
+		if(this.state.date){
+			displayDate = new Date(this.state.date).toISOString().slice(0,10)
+		}
 		return(
 			<div className="event-form">
 				<form>
@@ -93,7 +99,7 @@ class EventForm extends React.Component{
 	          			<input className="form-control"
 	          			type="date"
 	          			name="date"
-	          			value={this.state.date}
+	          			value={displayDate}
 	          			onChange={this.handleChange} />
 	          		</div>
 	          		<div className="form-group">

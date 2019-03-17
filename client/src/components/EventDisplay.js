@@ -4,10 +4,7 @@ class EventDisplay extends React.Component{
 	constructor(props){
 		super()
 		this.state = {
-			name: props.event.name,
-			description: props.event.description,
-			image: props.event.image,
-			location: props.event.location
+			...props.event
 		}
 	}
 	componentWillReceiveProps(nextProps){
@@ -27,9 +24,8 @@ class EventDisplay extends React.Component{
 				<div className="card-body">
 					<h5 className="card-title"> {this.state.name} </h5>
 					<p className="card-text"> {this.state.description} </p>
-					<ul className="list-group list-group-flush">
-						<li className="list-group-item"> Location: {this.state.location} </li>
-					</ul>
+					<p className="card-text"> Location: {this.state.location} </p>
+					<p className="card-text"> {new Date(this.state.date).toLocaleString('en-US')} </p>
 				</div>
 			</div>
 		)
