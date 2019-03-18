@@ -21,10 +21,10 @@ img.profile-pic{
 	width: 100%;
 }
 div.card{
-	padding-left:15px;
+/*	padding-left:15px;
 	padding-right: 15px;
-	padding-top: 8px;
-	background-color: #49d1ce
+	padding-top: 8px;*/
+	background-color: white;
 }
 div.landing-page{
 	background-color: #daefef;
@@ -50,16 +50,46 @@ div.col-md-auto{
 	overflow: hidden;
 }
 .event-image-container img{
-  position: absolute;
+/*  position: absolute;
   left: 50%;
   top: 50%;
   height: 100%;
   width: auto;
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-}
+          transform: translate(-50%, -50%);*/
 
+}
+.row{
+	margin: 0px;
+	flex-direction: row;
+	justify-content: center;
+}
+.card-body{
+	padding: 0;
+}
+.event-image-container{
+	width: 350px;
+
+}
+.event-info{
+	width: calc(100% - 350px);
+	min-width: 350px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+.event-info-container{
+
+}
+.event-details-container{
+	position: absolute;
+	bottom: 0px;
+}
+.event-details{
+	display: inline-block;
+}
 /*
 	Flip container
 */
@@ -134,7 +164,7 @@ button.event-revert, button.event-submit{
 }
 
 .homepage-card{
-	/*max-width: 750px;*/
+	max-width: 750px;
 	min-width: 300px;
 }
 

@@ -85,17 +85,35 @@ class EventHomepage extends React.Component{
 		})	
 	}
 	render(){
+		let displayDate = new Date(this.state.date).toLocaleString('en-US').substring(0,9)
 		return(
 			<div>
-				<div className="event-image-container">
-					<img className="card-img-top" src={this.state.image} alt=""/>
-				</div>
 				<div className="card-body">
-					<h5 className="card-title"> {this.state.name} </h5>
-					<p className="card-text"> {this.state.description} </p>
-					<ul className="list-group list-group-flush">
-						<li className="list-group-item"> Location: {this.state.location} </li>
-					</ul>
+					<div className="row" >
+						<div className="event-image-container">
+							<img className="card-img-top" src={this.state.image} alt=""/>
+						</div>
+						<div className="event-info">
+							<div className="event-info-container">
+								<h5 className="card-title"> {this.state.name} </h5>
+								<p className="card-text"> {this.state.description} </p>
+							</div>
+							<div className="event-details-container">
+								<div className="event-details">
+									<div className="event-location">
+										<p className="card-text"> 
+											Location:
+										</p>
+									</div>
+									<div className="event-date">
+										<p className="card-text">
+											tempdate
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 					<p className="card-text"> 
 						{ (this.state.userId !== 0) && (
 							this.state.likes.length === 0 ?
