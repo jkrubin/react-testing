@@ -91,23 +91,27 @@ class EventHomepage extends React.Component{
 				<div className="card-body">
 					<div className="row" >
 						<div className="event-image-container">
-							<img className="card-img-top" src={this.state.image} alt=""/>
+							<div className="event-image">
+								<img className="card-img-top" src={this.state.image} alt=""/>
+							</div>
 						</div>
-						<div className="event-info">
+						<div className="event-content-container">
 							<div className="event-info-container">
-								<h5 className="card-title"> {this.state.name} </h5>
-								<p className="card-text"> {this.state.description} </p>
+								<div className="event-info">
+									<h5 className="card-title"> {this.state.name} </h5>
+									<p className="card-text"> {this.state.description} </p>
+								</div>
 							</div>
 							<div className="event-details-container">
 								<div className="event-details">
 									<div className="event-location">
 										<p className="card-text"> 
-											Location:
+											At: {this.state.location}
 										</p>
 									</div>
 									<div className="event-date">
 										<p className="card-text">
-											tempdate
+											{displayDate}
 										</p>
 									</div>
 								</div>

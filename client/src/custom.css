@@ -45,19 +45,13 @@ div.col-md-auto{
 
 .event-image-container{
 	position: relative;
-	width: 100%;
-	height: 300px;
+	max-width: 378px;
 	overflow: hidden;
+	width: auto;
+	height: 300px;
 }
-.event-image-container img{
-/*  position: absolute;
-  left: 50%;
-  top: 50%;
-  height: 100%;
-  width: auto;
-  -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);*/
+.event-image{
+	height: 300px;
 
 }
 .row{
@@ -68,28 +62,7 @@ div.col-md-auto{
 .card-body{
 	padding: 0;
 }
-.event-image-container{
-	width: 350px;
 
-}
-.event-info{
-	width: calc(100% - 350px);
-	min-width: 350px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: relative;
-}
-.event-info-container{
-
-}
-.event-details-container{
-	position: absolute;
-	bottom: 0px;
-}
-.event-details{
-	display: inline-block;
-}
 /*
 	Flip container
 */
@@ -176,4 +149,47 @@ button.event-revert, button.event-submit{
 .landing-page .carousel-inner{
 	background-color: black;
 	z-index: 0;
+}
+
+.event-location{
+	display: inline-block;
+	float: left;
+	padding-left: 8px;
+}
+
+.event-date{
+	display: inline-block;
+	float:right;
+	padding-right: 8px;
+}
+
+.event-content-container{
+	flex:1;
+	min-width: 350px;
+	min-height: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+
+	margin: 10px;
+    border: 1px solid;
+    margin-bottom: 0px;
+}
+.event-info-container{
+	min-height: 100px
+}
+.event-details-container{
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+}
+.event-details{
+	display: inline-block;
+	width: 100%;
+	padding-bottom: 15px;
+}
+.card-img-top{
+	height: 100%;
+	width: auto;
 }
