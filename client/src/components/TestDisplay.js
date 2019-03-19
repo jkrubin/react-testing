@@ -1,7 +1,7 @@
 import React from "react"
 import { api } from "../config/config"
 
-class EventHomepage extends React.Component{
+class TestDisplay extends React.Component{
 	constructor(props){
 		super()
 		this.state = {
@@ -96,26 +96,62 @@ class EventHomepage extends React.Component{
 							</div>
 						</div>
 						<div className="event-content-container">
-							<div className="event-info-container">
-								<div className="event-info">
-									<h5 className="card-title"> {this.state.name} </h5>
-									<p className="card-text"> {this.state.description} </p>
-								</div>
-							</div>
-							<div className="event-details-container">
-								<div className="event-details">
-									<div className="event-location">
+							<ul className="event-content-list">
+								<li className="event-name">
+									<div className="event-name-div">
+										<h5 className="card-title"> {this.state.name} </h5>
+									</div>
+								</li>
+								<li className="event-desc">
+									<div className="list-icon-container">
+										<img
+											src={require('../assets/infoIcon.png')}
+											height='15'
+											width='15'
+											alt=""
+										/>
+										<div className="border-container"> </div>
+									</div>
+									<div className="event-desc-div list-content">
+										<h6 className="card-text">Description: </h6>
+										<p className="card-text"> {this.state.description} </p>
+									</div>
+								</li>
+								<li className="event-loc">
+									<div className="list-icon-container">
+										<img
+											src={require('../assets/locationIcon.png')}
+											height='15'
+											width='15'
+											alt=""
+										/>
+										<div className="border-container"> </div>
+									</div>
+									<div className="event-location-div list-content">
+										<h6 className="card-text">Location: </h6>
 										<p className="card-text"> 
-											At: {this.state.location}
+											At {this.state.location}
 										</p>
 									</div>
-									<div className="event-date">
+								</li>
+								<li className="event-datetime">
+									<div className="list-icon-container">
+										<img
+											src={require('../assets/dateIcon.png')}
+											height='15'
+											width='15'
+											alt=""
+										/>
+										<div className="border-container"> </div>
+									</div>
+									<div className="event-date-div list-content">
+										<h6 className="card-text">Date: </h6>
 										<p className="card-text">
 											{displayDate}
 										</p>
 									</div>
-								</div>
-							</div>
+								</li>
+							</ul>
 						</div>
 					</div>
 					<p className="card-text"> 
@@ -148,4 +184,4 @@ class EventHomepage extends React.Component{
 	}
 }
 
-export default EventHomepage
+export default TestDisplay

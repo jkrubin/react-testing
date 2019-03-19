@@ -134,6 +134,9 @@ button.event-revert, button.event-submit{
 }
 .user-bio{
 	padding-bottom :45px;
+	padding-top: 25px;
+	display: flex;
+	justify-content: space-around;
 }
 
 .homepage-card{
@@ -172,9 +175,9 @@ button.event-revert, button.event-submit{
 	align-items: center;
 	position: relative;
 
-	margin: 10px;
+}
+.event-row{
     border: 1px solid;
-    margin-bottom: 0px;
 }
 .event-info-container{
 	min-height: 100px
@@ -185,11 +188,77 @@ button.event-revert, button.event-submit{
 	width: 100%;
 }
 .event-details{
-	display: inline-block;
+	display: flex;
 	width: 100%;
 	padding-bottom: 15px;
+	justify-content: space-around;
 }
 .card-img-top{
 	height: 100%;
 	width: auto;
+}
+.user-container{
+	border: 1px solid black;
+    min-height: 200px;
+    border-radius: 100px;
+}
+.bio-row{
+	flex-direction: row;
+	justify-content: center;
+}
+.profile-image-container{
+	position: relative;
+	max-width: 200px;
+	overflow: hidden;
+	width: auto;
+	height: 200px;
+	border-radius: 100px;
+}
+.event-user-container{
+	flex: 1;
+	min-width: 350px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.event-content-list{
+	list-style-type: none;
+	align-items: left;
+}
+.event-content-list li{
+	display: flex;
+	text-align: left;
+}
+.list-icon-container{
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	padding-right: 8px;
+}
+.list-icon-container img{
+	margin-bottom: 2px;
+	margin-top: 2px;
+}
+.list-content{
+	padding-bottom: 5px;
+}
+.border-container{
+	width: 0px;
+	flex: auto;
+	border: 2px #acb4b7 solid;
+}
+@media (max-width: 570px){
+	.event-user-container{
+		min-width: 200px;
+		width: auto;
+		padding-bottom: 50px;
+
+	}
+	.bio-row{
+		width: 200px;
+	}
 }

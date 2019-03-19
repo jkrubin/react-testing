@@ -2,6 +2,7 @@ import React from "react"
 import { AuthContext } from "../Contexts/AuthContext"
 import { api } from "../config/config"
 import EventHomepage from "./EventHomepage"
+import TestDisplay from "./TestDisplay"
 import {Carousel} from 'react-bootstrap'
 
 class Landing extends React.Component{
@@ -54,7 +55,7 @@ class Landing extends React.Component{
 			return(
 				<Carousel.Item>
 					<div className = "card homepage-card">
-						<EventHomepage event={event} userId={this.state.auth.user.id} /> 
+						<TestDisplay event={event} userId={this.state.auth.user.id} /> 
 					</div>
 				</Carousel.Item>
 			)
