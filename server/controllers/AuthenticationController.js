@@ -2,6 +2,7 @@ const {users} = require('../models')
 const jwt = require('jsonwebtoken')
 const config = require('../config/authConfig')
 const fs = require('fs')
+const sharp = require('sharp')
 
 function jwtSignUser (user) {
 	const ONE_WEEK = 60 * 60 * 24 * 7
@@ -127,6 +128,7 @@ module.exports = {
 			try{
 				if(req.files.file){
 					image = req.files.file
+					console.log(image.size)
 				}
 			}catch(err){
 				console.log(err)
