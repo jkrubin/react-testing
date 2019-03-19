@@ -23,7 +23,9 @@ module.exports = {
 			try{
 				if(req.files.file){
 					image = req.files.file
-					//console.log(image.data)
+					if(image.size > 50000){
+						res.status(500).send({error: "This image is too large. Please crop or select a smaller image"})
+					}
 				}
 			}catch(err){
 				console.log(err)
@@ -128,7 +130,9 @@ module.exports = {
 			try{
 				if(req.files.file){
 					image = req.files.file
-					console.log(image.size)
+					if(image.size > 50000){
+						return res.status(500).send({error: "Image is too large, please crop it or pick a smaller image"})
+					}
 				}
 			}catch(err){
 				console.log(err)
