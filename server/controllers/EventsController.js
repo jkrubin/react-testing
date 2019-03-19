@@ -82,16 +82,16 @@ module.exports = {
 	},
 	async updateEvent(req, res) {
 		try{
-			let image = false
+			let eventImage = false
 			try{
 				if(req.files.file){
-					image = req.files.file
+					eventImage = req.files.file
 				}
-				if(image){
-					let encoded = image.data.toString('base64')
-					imgur.uploadBase64(encoded)
+				if(eventImage){
+					let encoded = eventImage.data.toString('base64')
+					await imgur.uploadBase64(encoded)
 						.then((json) => {
-							console.log(json.data.link)
+							eventImage = json.data.link
 						})
 						.catch((err) => {
 							console.log(err.message)
@@ -114,7 +114,7 @@ module.exports = {
 			})
 			if(!tempEvent){
 				try{
-					const newEvent = await Event.create(req.body)
+					const newEvent = await Event.create({...req.body, image: eventImage})
 					return res.send({newEvent})
 
 				}catch(err){
@@ -122,10 +122,13 @@ module.exports = {
 					res.status(500).send({error: "could not create new event"})
 				}
 			}else{
+				if(!eventImage){
+					eventImage = tempEvent.image
+				}
 				tempEvent.update({
 				    name: name,
 				    description: description,
-				    image: image,
+				    image: eventImage,
 				    location: location,
 				    date: date,
 				    capacity: capacity
