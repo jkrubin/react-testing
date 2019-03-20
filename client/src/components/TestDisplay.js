@@ -106,7 +106,7 @@ class TestDisplay extends React.Component{
 							<ul className="event-content-list">
 								<li className="event-name">
 									<div className="event-name-div">
-										<h5 className="card-title"> {this.state.name} </h5>
+										<h3 className="card-title"> {this.state.name} </h3>
 									</div>
 								</li>
 								<li className="event-user">

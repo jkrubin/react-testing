@@ -1,6 +1,7 @@
 import React from "react"
 import EventDisplay from "./EventDisplay"
 import EventForm from "./EventForm"
+import UserDisplay from "./UserDisplay"
 class EventCard extends React.Component{
 	constructor(props){
 		super(props)
@@ -9,6 +10,7 @@ class EventCard extends React.Component{
 			event: props.event,
 			cardFlip: props.cardFlip
 		}
+
 		if(!props.event.id){
 			this.state.cardFlip = true
 		}
@@ -26,25 +28,41 @@ class EventCard extends React.Component{
 	}
 
 	render(){
+		let userList = []
+		if(this.state.event.likes && this.state.event.likes.length){
+			userList = this.state.event.likes.map((like) =>{
+				return(
+					<UserDisplay like={like} />
+				)
+			})	
+		}
 		return(
-			<div className="card event-card" >
-				<div className="flip-container">
-					<div className={this.state.cardFlip ? "flipper flipped" : "flipper"}>
-						<div className="front">
-							<div className="event-bar">
-								<button onClick={this.flipCard}> Edit Event </button>
-								<button onClick={this.props.newEventTemplate}> Create New Event </button>
-								<button onClick={() => this.props.deleteEvent(this.state.event)}> Delete Event </button>
+			<div className= "event-container">
+				<div className="card event-card" >
+					<div className="flip-container">
+						<div className={this.state.cardFlip ? "flipper flipped" : "flipper"}>
+							<div className="front">
+								<div className="event-bar">
+									<button onClick={this.flipCard}> Edit Event </button>
+									<button onClick={this.props.newEventTemplate}> Create New Event </button>
+									<button onClick={() => this.props.deleteEvent(this.state.event)}> Delete Event </button>
+								</div>
+								<EventDisplay event={this.state.event} />
 							</div>
-							<EventDisplay event={this.state.event} />
+							<div className="back">
+								<EventForm 
+								event={this.state.event} 
+								submitEvent={this.props.submitEvent} 
+								flipCard={this.flipCard}
+								cancelNewEvent={this.props.cancelNewEvent} />
+							</div>
 						</div>
-						<div className="back">
-							<EventForm 
-							event={this.state.event} 
-							submitEvent={this.props.submitEvent} 
-							flipCard={this.flipCard}
-							cancelNewEvent={this.props.cancelNewEvent} />
-						</div>
+					</div>
+				</div>
+				<div className="users-row" >
+					<h3> People interested in your event!</h3>
+					<div className="users-list-container">
+						{userList}
 					</div>
 				</div>
 			</div>
