@@ -174,6 +174,8 @@ button.event-revert, button.event-submit{
 	justify-content: center;
 	align-items: center;
 	position: relative;
+	margin-left: 15px;
+	margin-right: 15px;
 
 }
 .event-row{
@@ -206,6 +208,10 @@ button.event-revert, button.event-submit{
 	flex-direction: row;
 	justify-content: center;
 }
+.event-name{
+	display: flex;
+	justify-content: center;
+}
 .profile-image-container{
 	position: relative;
 	max-width: 200px;
@@ -216,7 +222,7 @@ button.event-revert, button.event-submit{
 }
 .event-user-container{
 	flex: 1;
-	min-width: 350px;
+	min-width: 250px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -228,6 +234,8 @@ button.event-revert, button.event-submit{
 .event-content-list{
 	list-style-type: none;
 	align-items: left;
+	width:100%;
+	padding:0;
 }
 .event-content-list li{
 	display: flex;
@@ -239,6 +247,9 @@ button.event-revert, button.event-submit{
 	align-items: center;
 	padding-right: 8px;
 }
+.list-flush{
+	padding-left: 46px;
+}
 .list-icon-container img{
 	margin-bottom: 2px;
 	margin-top: 2px;
@@ -249,7 +260,53 @@ button.event-revert, button.event-submit{
 .border-container{
 	width: 0px;
 	flex: auto;
-	border: 2px #acb4b7 solid;
+	border: 2.5px #4286f4 solid;
+}
+
+.list-profile-container{
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 100px;
+	border-radius: 50px;
+	border:  3px #4286f4 solid;
+	display: flex;
+	flex-direction: row;
+}
+.list-profile{
+	width: 100px;
+	height:100px;
+	border-radius: 50px;
+	overflow: hidden;
+}
+.list-profile img{
+	width: 120%;
+	height:120%;
+	transform: translate(-10%, -10%);
+	margin: 0px;
+}
+.hide-event-info{
+	transform:scale(1,0);
+	transform-origin: top;
+	transition: 0.4s;
+	position: absolute;
+}
+.show-profile{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: auto;
+}
+.min-prof{
+	transform: scale(0 , 0);
+	transform-origin: top;
+	transition: 0.4s;
+	height: 0px;
+}
+.expand-prof{
+	transform: scale(1, 1);
+	transform-origin: top;
+	transition: 0.4s;
 }
 @media (max-width: 570px){
 	.event-user-container{
