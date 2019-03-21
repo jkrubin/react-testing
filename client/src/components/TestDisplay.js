@@ -9,16 +9,29 @@ class TestDisplay extends React.Component{
 			userId: props.userId,
 			isLoading: false,
 			error: false,
-			displayProf: false
+			displayProf: false,
+			submitLike: false,
+			likeMessage: "",
 		}
 		this.submitLike = this.submitLike.bind(this)
 		this.deleteLike = this.deleteLike.bind(this)
 		this.toggleProfile = this.toggleProfile.bind(this)
+		this.toggleLike = this.toggleLike.bind(this)
+		this.handleChange = this.handleChange.bind(this)
 	}
 	toggleProfile(){
 		this.setState((prevState) =>{
 			return {displayProf: !prevState.displayProf}
 		})
+	}
+	toggleLike(){
+		this.setState((prevState) =>{
+			return {submitLike: !prevState.submitLike}
+		})
+	}
+	handleChange(event){
+		const {name, value} = event.target
+		this.setState({[name]: value})
 	}
 	submitLike(){
 		this.setState({
@@ -26,7 +39,8 @@ class TestDisplay extends React.Component{
 		})
 		let data = {
 			userId: this.state.userId,
-			EventId: this.state.id
+			EventId: this.state.id,
+			message: this.state.likeMessage
 		}
 		fetch(api + '/createLike', {
 			method: "POST",
@@ -42,12 +56,14 @@ class TestDisplay extends React.Component{
 			if(like.error){
 				this.setState({
 					error: like.error,
-					isLoading: false
+					isLoading: false,
+					submitLike: false
 				})
 			}else if(like.like){
 				this.setState((prevState) =>{
 					prevState.likes.push(like.like)
 					prevState.isLoading = false
+					prevState.submitLike = false
 					return prevState
 				})
 			}
@@ -93,6 +109,14 @@ class TestDisplay extends React.Component{
 	}
 	render(){
 		let displayDate = new Date(this.state.date).toLocaleString('en-US').substring(0,9)
+		let likeDisplay
+		if(this.state.userId !== 0){
+			if(this.state.likes.length === 0){
+				likeDisplay = <button type="button" className="btn btn-primary" onClick={this.toggleLike}> heart this event! </button>
+			}else{
+				likeDisplay = <button type="button" className="btn btn-primary" onClick={this.deleteLike}> You like this Event </button>
+			}
+		}
 		return(
 			<div>
 				<div className="card-body">
@@ -179,15 +203,23 @@ class TestDisplay extends React.Component{
 									</li>
 								</div>
 							</ul>
+							<div className="like-container">
+								{likeDisplay}
+							</div>
+							{this.state.submitLike &&
+								<div className="like-submit-container">
+									<div className="like-form-container">
+										<input name="likeMessage" 
+										type="text"
+										value={this.state.likeMessage}
+										onChange={this.handleChange}
+										/>
+										<button onClick={this.submitLike}> Send Like </button>
+									</div>
+								</div>
+							}
 						</div>
 					</div>
-					<p className="card-text"> 
-						{ (this.state.userId !== 0) && (
-							this.state.likes.length === 0 ?
-								(<button type="button" className="btn btn-primary" onClick={this.submitLike}> heart this event! </button>)
-								:(<button type="button" className="btn btn-primary" onClick={this.deleteLike}> You like this Event </button>)
-						)} 
-					</p>
 				</div>
 			</div>
 		)

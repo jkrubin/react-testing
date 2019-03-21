@@ -62,8 +62,16 @@ class Landing extends React.Component{
 		})
 		return(
 			<div className="landing-page">
-				<div className="container">
-					<h1> User Landing </h1>
+				<div className="container homepage-top">
+					<h1> Table For 2 </h1>
+					<p> 
+						Table for 2 is an app that connects you with events and
+						activities happenening around you! Browse events submitted by
+						other users, and connect with them by creating an account and
+						liking their event. You can also create your own event by going
+						to "My Account", where you can manage your profile and events...
+					</p>
+					<h2> Events Around me: </h2>
 				</div>
 				<Carousel interval = {null}>
 					{eventGrid}

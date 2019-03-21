@@ -144,6 +144,9 @@ button.event-revert, button.event-submit{
 	justify-content: space-around;
 }
 
+.homepage-top{
+	text-align: left;
+}
 .homepage-card{
 	max-width: 750px;
 	min-width: 300px;
@@ -152,6 +155,12 @@ button.event-revert, button.event-submit{
 .carousel-item.active.carousel-item{
 	display: flex;
 	justify-content: space-around;
+}
+
+.carousel-control-next, .carousel-control-prev{
+	background-color: gray;
+	height: 100px;
+	top:calc(50% - 50px);
 }
 
 .landing-page .carousel-inner{
@@ -261,6 +270,25 @@ button.event-revert, button.event-submit{
 }
 .list-content{
 	padding-bottom: 5px;
+}
+.like-container{
+	position: absolute;
+	bottom: 25px;
+	right:15px;
+}
+.like-submit-container{
+	position:absolute;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-around;
+	width: 300px;
+	height: 200px;
+	background: rgb(136, 139, 145, .5);
+	border-radius: 10%;
+	border: 2px solid black;
+}
+.like-form-container{
+
 }
 .border-container{
 	width: 0px;

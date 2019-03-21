@@ -23,7 +23,7 @@ class Header extends React.Component{
 						alt=""
 					/>
 				</Link>
-				<Navbar.Brand >Test App</Navbar.Brand>
+				<Navbar.Brand >TABLE FOR 2</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="mr-auto">
