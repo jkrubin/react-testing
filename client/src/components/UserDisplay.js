@@ -14,6 +14,9 @@ class UserDisplay extends React.Component{
 			return {displayProf: !prevState.displayProf}
 		})
 	}
+	componentWillReceiveProps(nextProps){
+		this.setState({...nextProps.like})
+	}
 	render(){
 		return(
 			<div>
@@ -28,6 +31,7 @@ class UserDisplay extends React.Component{
 						<div className="event-user">
 							<h4 className="event-username"> {this.state.user.name} </h4>
 							<div className={this.state.displayProf ? "expand-prof" : "min-prof"}>
+								<button onClick={() => this.props.toggleInvite({id: this.state.id})}> Invite {this.state.user.name}! </button>
 								<ul className="event-content-list">
 									<li className="user-like-message">
 										<div className="list-icon-container">
