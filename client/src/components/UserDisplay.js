@@ -28,7 +28,40 @@ class UserDisplay extends React.Component{
 						<div className="event-user">
 							<h4 className="event-username"> {this.state.user.name} </h4>
 							<div className={this.state.displayProf ? "expand-prof" : "min-prof"}>
-								<p className="card-text event-bio"> {this.state.user.bio} </p>
+								<ul className="event-content-list">
+									<li className="user-like-message">
+										<div className="list-icon-container">
+											<img
+												src={require('../assets/infoIcon.png')}
+												height='15'
+												width='15'
+												alt=""
+											/>
+											<div className="border-container"> </div>
+										</div>
+										<div className="event-desc-div list-content">
+											<h6 className="card-text">Message: </h6>
+											<p className="card-text"> {this.state.message} </p>
+										</div>
+									</li>
+									<li className="user-like-bio">
+										<div className="list-icon-container">
+											<img
+												src={require('../assets/locationIcon.png')}
+												height='15'
+												width='15'
+												alt=""
+											/>
+											<div className="border-container"> </div>
+										</div>
+										<div className="event-location-div list-content">
+											<h6 className="card-text">Bio: </h6>
+											<p className="card-text"> 
+												{this.state.user.bio}
+											</p>
+										</div>
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>

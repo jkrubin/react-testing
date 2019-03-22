@@ -193,7 +193,7 @@ class Dashboard extends React.Component{
 		return(
 			<div>
 				<h1> Hello {this.state.auth.user.name} </h1>
-				<div className="container">
+				<div className="">
 					<div className="dash-area row">
 						<div className="profile-area col-lg">
 							<Profile user={this.state.auth.user} token={this.state.auth.token} />

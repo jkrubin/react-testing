@@ -24,6 +24,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true
     },
+    birthday: DataTypes.DATE,
+    location: DataTypes.STRING,
     password: DataTypes.STRING,
     profilePicture: {
       type: DataTypes.BLOB,

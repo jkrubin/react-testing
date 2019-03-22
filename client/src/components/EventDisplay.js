@@ -27,7 +27,7 @@ class EventDisplay extends React.Component{
 								<img className="card-img-top" src={this.state.image} alt="" />
 						</div>
 					</div>
-					<div className="event-content-container">
+					<div className="event-content-container profile-event">
 						<ul className="event-content-list">
 							<li className="event-name">
 								<div className="event-name-div">
@@ -35,7 +35,7 @@ class EventDisplay extends React.Component{
 								</div>
 							</li>
 							<li className="event-desc ">
-								<div className="list-icon-container list-flush ">
+								<div className="list-icon-container">
 									<img
 										src={require('../assets/infoIcon.png')}
 										height='15'
@@ -50,7 +50,7 @@ class EventDisplay extends React.Component{
 								</div>
 							</li>
 							<li className="event-loc ">
-								<div className="list-icon-container list-flush">
+								<div className="list-icon-container">
 									<img
 										src={require('../assets/locationIcon.png')}
 										height='15'
@@ -67,7 +67,7 @@ class EventDisplay extends React.Component{
 								</div>
 							</li>
 							<li className="event-datetime ">
-								<div className="list-icon-container list-flush">
+								<div className="list-icon-container">
 									<img
 										src={require('../assets/dateIcon.png')}
 										height='15'
