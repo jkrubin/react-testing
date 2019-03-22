@@ -29,6 +29,19 @@ module.exports = {
 				error: "Failed to delete Like"
 			})
 		}
+	},
+	async matchLike(req, res){
+		try{
+			const{id} = req.body
+			const tempLike = await Like.findOne({where:{id: id}})
+			tempLike.update({
+				matched: !tempLike.matched
+			}).then(() => {
+				res.send({tempLike})
+			})
+		}catch(err){
+			res.status(500).send({error: 'Could not create match'})
+		}
 	}
 
 }

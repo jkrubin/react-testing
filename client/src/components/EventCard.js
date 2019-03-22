@@ -28,13 +28,22 @@ class EventCard extends React.Component{
 	}
 
 	render(){
-		let userList = []
+		let likeList = []
+		let matchList = []
 		if(this.state.event.likes && this.state.event.likes.length){
-			userList = this.state.event.likes.map((like) =>{
-				return(
-					<UserDisplay like={like} />
-				)
-			})	
+			let likes = this.state.event.likes
+			for(let i = 0; i < likes.length; i++){
+				if(likes[i].matched){
+					matchList.push(<UserDisplay like={likes[i]} />)
+				}else{
+					likeList.push(<UserDisplay like={likes[i]} />)
+				}
+			}
+			// likeList = this.state.event.likes.map((like) =>{
+			// 	return(
+			// 		<UserDisplay like={like} />
+			// 	)
+			// })	
 		}
 		return(
 			<div className= "event-container">
@@ -62,7 +71,7 @@ class EventCard extends React.Component{
 				<div className="users-row" >
 					<h3> People interested in your event!</h3>
 					<div className="users-list-container">
-						{userList}
+						{likeList}
 					</div>
 				</div>
 			</div>

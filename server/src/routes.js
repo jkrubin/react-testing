@@ -39,4 +39,6 @@ module.exports = (app) => {
 			LikesController.createLike)
 		app.post('/deleteLike',
 			LikesController.deleteLike)
+		app.post('/matchLike',
+			LikesController.matchLike)
 }

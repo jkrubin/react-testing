@@ -1,6 +1,3 @@
-
-header{
-}
 div.error{
 	color:red;
 	text-align: center;
@@ -21,9 +18,6 @@ img.profile-pic{
 	width: 100%;
 }
 div.card{
-/*	padding-left:15px;
-	padding-right: 15px;
-	padding-top: 8px;*/
 	background-color: white;
 }
 div.landing-page{
@@ -227,8 +221,8 @@ button.event-revert, button.event-submit{
 	justify-content: space-around;
 }
 .card-img-top{
-	height: 100%;
-	width: auto;
+	height: auto;
+	width: 100%;
 }
 .user-container{
 	border: 1px solid black;
