@@ -212,15 +212,15 @@ module.exports = {
 	},
 	async getInvitedEvents(req, res){
 		try{
-			const {id} = req.body
+			const {userId} = req.body
 			const eventArr = await Event.findAll({
 				include: [
 					{
 						model: Like, 
 						as: 'likes', 
-						where:{userId: id, invited: true},
+						where:{userId: userId, invited: true},
 					},
-					{model: chat, as: 'chat'}
+					{model: chat, as: 'chat', required: false}
 				]
 			})
 			if(!eventArr){
