@@ -29,6 +29,7 @@ class Header extends React.Component{
 					<Nav className="mr-auto">
 						<Link className="nav-link float-right" to="/"> Homepage </Link>
 						<Link className="nav-link" to="/dashboard"> My Account </Link>
+						<Link className="nav-link" to="/chat"> Chat </Link>
 					</Nav>
 				</Navbar.Collapse>
 				<span className="navbar-text">
