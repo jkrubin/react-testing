@@ -34,6 +34,8 @@ module.exports = (app) => {
 			EventsController.deleteEvent)
 		app.post('/getHomepageEvents',
 			EventsController.getHomepageEvents)
+		app.post('/getEventChat',
+			EventsController.getEventChat)
 
 	//Like endpoints
 		app.post('/createLike',

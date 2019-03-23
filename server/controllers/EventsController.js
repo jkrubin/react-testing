@@ -1,6 +1,7 @@
 const {Event} = require('../models')
 const {users} = require('../models')
 const {Like} = require('../models')
+const {chat, message} = require('../models')
 
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op
@@ -186,6 +187,27 @@ module.exports = {
 			console.log(err)
 			res.status(500).send({error: "Could not get Events"})
 		}
-	}
+	},
+	async getEventChat(req, res) {
+		try{
+			const{id} = req.body
+			const eventChat = await Event.findOne({
+				where: {id: id},
+				include: [{
+					model: chat, as: 'chat',
+					include: [{model: message, as: 'message', required: false}]
+				}]
+			})
+			if(!eventChat){
+				return res.status(400).send({error: "Chat not found"})
+			}
+			res.send({eventChat})
+		}catch(err){
+			console.log(err)
+			res.status(500).send({
+				error: "Failed to retrieve this Chat"
+			})
+		}
+	},
 
 }
