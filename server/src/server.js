@@ -11,6 +11,9 @@ app.use(bodyParser.json())
 app.use(cors())
 app.use(fileUpload())
 
+let http = require('http').Server(app)
+var io = require('socket.io')(http)
+
 require('./routes')(app)
 app.get('/', (req, res) => res.send('Hello World!'))
 
