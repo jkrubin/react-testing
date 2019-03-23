@@ -4,6 +4,7 @@ import { api } from "../config/config"
 import EventHomepage from "./EventHomepage"
 import TestDisplay from "./TestDisplay"
 import {Carousel} from 'react-bootstrap'
+import openSocket from 'socket.io-client';
 
 class Landing extends React.Component{
 	constructor(props, context){
@@ -15,6 +16,7 @@ class Landing extends React.Component{
 			error: "",
 
 		}
+		const socket = openSocket(api)
 	}
 	componentDidMount(){
 		this.setState({
