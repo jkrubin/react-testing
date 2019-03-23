@@ -6,7 +6,14 @@ const AuthenticationControllerPolicy = require('../policies/AuthenticationContro
 module.exports = (app, io) => {
 
 	app.get('/route', (req, res) => res.send('routes'))
-	io.on('connection',() => {console.log('connection')})
+	io.on('connection',(socket) => {
+		console.log('connection')
+		socket.on('disconnect', () => {console.log('disconnect')})
+		socket.on('newMessage', (msg) => {
+			console.log(msg)
+			io.emit('newMessage', msg)
+		})
+	})
 	//Users endpoints
 		//Register User
 		app.post('/register',
