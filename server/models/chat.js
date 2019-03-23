@@ -4,7 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING
   }, {});
   chat.associate = function(models) {
-    // associations can be defined here
+    chat.belongsTo(models.Event, {foreignKey:'EventId', as: 'event'})
+    chat.hasMany(models.message, {as: 'message'})
+
   };
   return chat;
 };

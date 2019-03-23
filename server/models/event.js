@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   Event.associate = function(models) {
     Event.belongsTo(models.users, {foreignKey:'userId', as: 'users'})
     Event.hasMany(models.Like, {as: 'likes'})
+    Event.hasMany(models.chat, {as: 'chat'})
 
   };
   return Event;

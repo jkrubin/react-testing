@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     content: DataTypes.STRING
   }, {});
   message.associate = function(models) {
-    // associations can be defined here
+    message.belongsTo(models.chat, {foreignKey:'chatId', as: 'chat'})
+    message.belongsTo(models.users, {foreignKey:'userId', as: 'user'})
   };
   return message;
 };
