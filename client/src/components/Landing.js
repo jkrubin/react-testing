@@ -16,7 +16,6 @@ class Landing extends React.Component{
 			error: "",
 
 		}
-		const socket = openSocket(api)
 	}
 	componentDidMount(){
 		this.setState({
