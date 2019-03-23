@@ -9,6 +9,7 @@ const Op = Sequelize.Op
 let imgur = require('imgur')
 imgur.setClientId('748f0fe4b93fa76')
 imgur.setAPIUrl('https://api.imgur.com/3/');
+
 module.exports = {
 	async createEvent(req, res) {
 		try{
@@ -209,5 +210,27 @@ module.exports = {
 			})
 		}
 	},
+	async getInvitedEvents(req, res){
+		try{
+			const {id} = req.body
+			const eventArr = await Event.findAll({
+				include: [
+					{
+						model: Like, 
+						as: 'likes', 
+						where:{userId: id, invited: true},
+					},
+					{model: chat, as: 'chat'}
+				]
+			})
+			if(!eventArr){
+				return res.status(400).send({error: "No events found"})
+			}
+			res.send({eventArr})
+		}catch(err){
+			console.log(err)
+			res.status(500).send({error: "Could not get Events"})
+		}
+	}
 
 }
