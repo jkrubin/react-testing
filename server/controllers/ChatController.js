@@ -12,9 +12,10 @@ module.exports = {
 			})
 		}
 	},
-	async createMessage(req, res) {
+	async createMessage(req, res, io) {
 		try{
 			const newMessage = await message.create(req.body)
+			io.emit('message', newMessage.content)
 			res.send({message: newMessage})
 		}catch(err){
 			console.log(err)

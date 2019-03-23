@@ -3,10 +3,10 @@ const EventsController = require('../controllers/EventsController')
 const LikesController = require('../controllers/LikesController')
 const ChatController = require('../controllers/ChatController')
 const AuthenticationControllerPolicy = require('../policies/AuthenticationControllerPolicy')
-module.exports = (app) => {
+module.exports = (app, io) => {
 
 	app.get('/route', (req, res) => res.send('routes'))
-
+	io.on('connection',() => {console.log('connection')})
 	//Users endpoints
 		//Register User
 		app.post('/register',
@@ -48,8 +48,9 @@ module.exports = (app) => {
 	//Chat endpoints
 		app.post('/createChat',
 			ChatController.createChat)
-		app.post('/createMessage',
-			ChatController.createMessage)
+		app.post('/createMessage', (req, res) => {
+			ChatController.createMessage(req, res, io)
+		})
 		app.post('/deleteChat',
 			ChatController.deleteChat)		
 }

@@ -14,7 +14,7 @@ app.use(fileUpload())
 let http = require('http').Server(app)
 var io = require('socket.io')(http)
 
-require('./routes')(app)
+require('./routes')(app, io)
 app.get('/', (req, res) => res.send('Hello World!'))
 
 sequelize
@@ -28,5 +28,6 @@ sequelize
 
 sequelize.sync()
 	.then(() => {
-		app.listen(8081, () => console.log('API listening on port 8081!'))
+		//app.listen(8081, () => console.log('API listening on port 8081!'))
+		http.listen(8081, ()=> console.log('API with sockets listening on port 8081'))
 	})  
