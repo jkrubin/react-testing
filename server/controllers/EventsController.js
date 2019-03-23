@@ -220,7 +220,18 @@ module.exports = {
 						as: 'likes', 
 						where:{userId: userId, matched: true},
 					},
-					{model: chat, as: 'chat', required: false}
+					{
+						model: chat, 
+						as: 'chat', 
+						required: false,
+						include:[{
+							model: Event, as: 'event',
+							include: [{model: Like, as: 'likes',
+								where: {matched: true},
+								include:[{model: users, as: 'user'}]
+							}]
+						}]
+					}
 				]
 			})
 			if(!eventArr){
