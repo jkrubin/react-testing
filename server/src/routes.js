@@ -1,6 +1,7 @@
 const AuthenticationController = require('../controllers/AuthenticationController')
 const EventsController = require('../controllers/EventsController')
 const LikesController = require('../controllers/LikesController')
+const ChatController = require('../controllers/ChatController')
 const AuthenticationControllerPolicy = require('../policies/AuthenticationControllerPolicy')
 module.exports = (app) => {
 
@@ -41,4 +42,12 @@ module.exports = (app) => {
 			LikesController.deleteLike)
 		app.post('/matchLike',
 			LikesController.matchLike)
+
+	//Chat endpoints
+		app.post('/createChat',
+			ChatController.createChat)
+		app.post('/createMessage',
+			ChatController.createMessage)
+		app.post('/deleteChat',
+			ChatController.deleteChat)		
 }
