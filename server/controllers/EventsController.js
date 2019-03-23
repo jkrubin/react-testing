@@ -218,7 +218,7 @@ module.exports = {
 					{
 						model: Like, 
 						as: 'likes', 
-						where:{userId: userId, invited: true},
+						where:{userId: userId, matched: true},
 					},
 					{model: chat, as: 'chat', required: false}
 				]
