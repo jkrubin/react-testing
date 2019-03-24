@@ -59,16 +59,6 @@
 	height: 130%;
 	transform:translate(-15%, -15%);
 }
-.chat-window{
-	display: flex;
-	flex-direction: column;
-	height: 100%
-}
-.message-container{
-	flex:1;
-	display: flex;
-	flex-direction: column-reverse;
-}
 .chat-window .message-container{
 	display: flex;
 	flex-flow: row;
