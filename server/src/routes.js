@@ -11,7 +11,7 @@ module.exports = (app, io) => {
 		socket.on('disconnect', () => {console.log('disconnect')})
 		socket.on('newMessage', (msg) => {
 			console.log(msg)
-			io.emit('newMessage' + msg.eventId, msg.message)
+			io.emit('newMessage' + msg.eventId, msg)
 		})
 	})
 	//Users endpoints

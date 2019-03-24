@@ -221,6 +221,9 @@ module.exports = {
 						where:{userId: userId, matched: true},
 					},
 					{
+						model: users, as: 'users'
+					},
+					{
 						model: chat, 
 						as: 'chat', 
 						required: false,
