@@ -46,7 +46,7 @@ class ChatEvent extends React.Component{
 			})
 		}
 		return(
-			<div className="container chat-container">
+			<div className="chat-container">
 				<div className="row event-row" >
 					<div className="event-image-col">
 						<div className={"event-image-container " + (this.state.displayEventDetails ? "" : "min-chat-event")}>
@@ -84,6 +84,10 @@ class ChatEvent extends React.Component{
 								</div>
 								{eventChatUsers}
 							</li>
+						</ul>
+					</div>
+					<ul className="event-content-list">
+						<div className="event-details-container">
 							{this.state.displayEventDetails &&
 								<div>
 									<li className="event-desc ">
@@ -137,8 +141,8 @@ class ChatEvent extends React.Component{
 									</li>
 								</div>
 							}
-						</ul>
-					</div>
+						</div>
+					</ul>
 				</div>
 			</div>
 		)

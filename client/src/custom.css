@@ -102,6 +102,7 @@ div.col-md-auto{
 	z-index: 2;
 	transform: rotateY(0deg);
 	position: relative;
+	min-height: 560px
 }
 
 /* back, initially hidden pane */

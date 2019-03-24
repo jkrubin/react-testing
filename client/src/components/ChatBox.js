@@ -2,6 +2,7 @@ import React from "react"
 import openSocket from 'socket.io-client'
 import { api } from "../config/config"
 import ChatEvent from "./ChatEvent"
+import MessageDisplay from "./MessageDisplay"
 import '../chat.css'
 class ChatBox extends React.Component{
 	constructor(props){
@@ -9,8 +10,8 @@ class ChatBox extends React.Component{
 		this.state = {
 			chatbox: "",
 			messages: [],
-			event: props.event,
 			userId: props.userId,
+			event: props.event,
 		}
 		this.socket = openSocket(api)
 		this.handleChange = this.handleChange.bind(this)
@@ -46,34 +47,44 @@ class ChatBox extends React.Component{
 		}
 	}
 	componentWillUnmount(){
-		console.log("bye")
 		this.socket.disconnect()
 	}
 	render(){
 		let messages = this.state.messages.map((message) => {
+			let user
+			if(message.userId === this.state.event.userId){
+				user = this.state.event.users
+			}else if(this.state.event.chat[0].event.likes.length){
+				let like = this.state.event.chat[0].event.likes.filter((like) => {
+					return like.user.id === message.userId
+				})
+				user = like[0].user
+			}
 			return(
-				<p> {message.message} </p>
+				<MessageDisplay message={message} user={user} isMe={(this.state.userId === message.userId)} />
 			)
 		})
 		return(
-			<div>
+			<div className="container chat-box-container">
 				<div>
-					<h1> Chat for {this.state.event.name} </h1>
 					<ChatEvent event={this.state.event} />
 				</div>
-				<div>
-					<div>
-						Messages
-						{messages}
+				<div className="chat-container">
+					<div className="chat-window-container">
+						<div className="chat-window">
+							{messages}
+						</div>
 					</div>
-					<input 
-						type="text" 
-						name="chatbox" 
-						value={this.state.chatbox} 
-						onChange={this.handleChange} 
-						onKeyPress={this.handleKeyPress}
-					/>
-					<button onClick={this.sendMessage}> Send </button>
+					<div className="chat-input-container">
+						<input 
+							type="text" 
+							name="chatbox" 
+							value={this.state.chatbox} 
+							onChange={this.handleChange} 
+							onKeyPress={this.handleKeyPress}
+						/>
+						<button onClick={this.sendMessage}> Send </button>
+					</div>
 				</div>
 			</div>
 		)

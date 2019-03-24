@@ -7,6 +7,7 @@ class ChatPage extends React.Component{
 		super(props, context)
 		this.state = {
 			eventArr: [],
+			myEventArr: [],
 			auth: context.auth,
 			isLoading: false
 
@@ -41,9 +42,42 @@ class ChatPage extends React.Component{
 		.catch(error => {
 			this.setState({error: error, isLoading: false})
 		})
+
+		fetch(api + '/getMyEvents', {
+			method: "POST",
+			headers:{
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(data)
+		})
+		.then(res => res.json())
+		.then((data) => {
+			const myEvents = data
+			if(myEvents.error){
+				this.setState({
+					error: myEvents.error,
+					isLoading: false
+				})
+			}else if(myEvents){
+				this.setState({
+					myEventArr: myEvents.eventArr,
+					isLoading: false
+				})
+			}
+		})
+		.catch(error => {
+			this.setState({error: error, isLoading: false})
+		})
 	}
 
 	render(){
+		let myEventDisplay = this.state.myEventArr.map((event) => {
+			return(
+				<div className = "chat-page">
+					<ChatBox event= {event} userId= {this.state.auth.user.id} />
+				</div>
+			)
+		})
 		let eventsDisplay = this.state.eventArr.map((event) => {
 			return(
 				<div className = "chat-page">
@@ -54,7 +88,11 @@ class ChatPage extends React.Component{
 		return(
 			<div>
 				<div>
-					Events: 
+					<h2> My hosted Events: </h2>
+					<div> 
+						{myEventDisplay}
+					</div>
+					<h2> Events You Matched with: </h2>
 					<div> {eventsDisplay} </div>
 				</div>
 			</div>
