@@ -116,11 +116,15 @@ module.exports = {
 			})
 			if(!tempEvent){
 				try{
-					const newEvent = await Event.create({...req.body, image: eventImage})
+					let eventJson = {...req.body}
+					delete eventJson.id
+					const newEvent = await Event.create({...eventJson, image: eventImage})
+					console.log(newEvent.toJSON())
+					const newChat = await chat.create({name: newEvent.name, EventId: newEvent.id })
 					return res.send({newEvent})
 
 				}catch(err){
-					console.log("err")
+					console.log(err)
 					res.status(500).send({error: "could not create new event"})
 				}
 			}else{
@@ -245,7 +249,7 @@ module.exports = {
 			console.log(err)
 			res.status(500).send({error: "Could not get Events"})
 		}
-	}
+	},
 	async getMyEvents(req, res){
 		try{
 			const {userId} = req.body
@@ -258,10 +262,10 @@ module.exports = {
 					{
 						model: chat, 
 						as: 'chat', 
-						required: false,
+						required: true,
 						include:[{
 							model: Event, as: 'event',
-							include: [{model: Like, as: 'likes',
+							include: [{model: Like, as: 'likes', required: false,
 								where: {matched: true},
 								include:[{model: users, as: 'user'}]
 							}]
@@ -277,6 +281,6 @@ module.exports = {
 			console.log(err)
 			res.status(500).send({error: "Could not get Events"})
 		}
-	}
+	},
 
 }
