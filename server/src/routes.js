@@ -45,6 +45,8 @@ module.exports = (app, io) => {
 			EventsController.getEventChat)
 		app.post('/getInvitedEvents',
 			EventsController.getInvitedEvents)
+		app.post('/getMyEvents',
+			EventsController.getMyEvents)
 
 	//Like endpoints
 		app.post('/createLike',

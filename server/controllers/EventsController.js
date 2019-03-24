@@ -246,5 +246,37 @@ module.exports = {
 			res.status(500).send({error: "Could not get Events"})
 		}
 	}
+	async getMyEvents(req, res){
+		try{
+			const {userId} = req.body
+			const eventArr = await Event.findAll({
+				where: {userId: userId},
+				include: [
+					{
+						model: users, as: 'users'
+					},
+					{
+						model: chat, 
+						as: 'chat', 
+						required: false,
+						include:[{
+							model: Event, as: 'event',
+							include: [{model: Like, as: 'likes',
+								where: {matched: true},
+								include:[{model: users, as: 'user'}]
+							}]
+						}]
+					}
+				]
+			})
+			if(!eventArr){
+				return res.status(400).send({error: "No events found"})
+			}
+			res.send({eventArr})
+		}catch(err){
+			console.log(err)
+			res.status(500).send({error: "Could not get Events"})
+		}
+	}
 
 }

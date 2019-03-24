@@ -1,7 +1,6 @@
 import React from "react"
 import { AuthContext } from "../Contexts/AuthContext"
 import { api } from "../config/config"
-import EventHomepage from "./EventHomepage"
 import TestDisplay from "./TestDisplay"
 import {Carousel} from 'react-bootstrap'
 import openSocket from 'socket.io-client';

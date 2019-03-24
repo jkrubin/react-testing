@@ -1,13 +1,16 @@
 import React from "react"
 import openSocket from 'socket.io-client'
 import { api } from "../config/config"
-
+import ChatEvent from "./ChatEvent"
+import '../chat.css'
 class ChatBox extends React.Component{
-	constructor(){
-		super()
+	constructor(props){
+		super(props)
 		this.state = {
 			chatbox: "",
-			messages: []
+			messages: [],
+			event: props.event,
+			userId: props.userId,
 		}
 		this.socket = openSocket(api)
 		this.handleChange = this.handleChange.bind(this)
@@ -15,7 +18,7 @@ class ChatBox extends React.Component{
 		this.handleKeyPress = this.handleKeyPress.bind(this)
 	}
 	componentWillMount(){
-		this.socket.on('newMessage', (msg) => {
+		this.socket.on('newMessage' + this.state.event.id, (msg) => {
 			this.setState((prevState) => {
 				prevState.messages.push(msg)
 				return prevState
@@ -32,8 +35,13 @@ class ChatBox extends React.Component{
 		this.setState({[name]: value})
 	}
 	sendMessage(){
+		let message = {
+			userId: this.state.userId,
+			eventId: this.state.event.id,
+			message: this.state.chatbox
+		}
 		if(this.state.chatbox !== ""){
-			this.socket.emit('newMessage', this.state.chatbox)
+			this.socket.emit('newMessage', message)
 			this.setState({chatbox: ""})
 		}
 	}
@@ -44,16 +52,18 @@ class ChatBox extends React.Component{
 	render(){
 		let messages = this.state.messages.map((message) => {
 			return(
-				<p> {message} </p>
+				<p> {message.message} </p>
 			)
 		})
 		return(
 			<div>
 				<div>
-					Messages
+					<h1> Chat for {this.state.event.name} </h1>
+					<ChatEvent event={this.state.event} />
 				</div>
 				<div>
 					<div>
+						Messages
 						{messages}
 					</div>
 					<input 

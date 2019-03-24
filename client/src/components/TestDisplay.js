@@ -1,6 +1,6 @@
 import React from "react"
 import { api } from "../config/config"
-
+import UserBubble from '../reusables/UserBubble'
 class TestDisplay extends React.Component{
 	constructor(props){
 		super()
@@ -134,22 +134,10 @@ class TestDisplay extends React.Component{
 									</div>
 								</li>
 								<li className="event-user">
-									<div className={"list-profile-container " + (this.state.displayProf ? "show-profile" : "")}>
-										<div className="list-profile">
-											<img src={`data:${this.state.users.mimeType};base64,${this.state.users.profilePicture}`} 
-												alt="" 
-												className="event-profile-pic"
-												onClick={this.toggleProfile}/>
-										</div>
-										<div className="event-user-container ">
-											<div className="event-user">
-												<h4 className="event-username"> {this.state.users.name} </h4>
-												<div className={this.state.displayProf ? "expand-prof" : "min-prof"}>
-													<p className="card-text event-bio"> {this.state.users.bio} </p>
-												</div>
-											</div>
-										</div>
-									</div>
+									<UserBubble 
+									user={this.state.users} 
+									displayProf={this.state.displayProf} 
+									toggleCallback={this.toggleProfile} />
 								</li>
 								<div className={(this.state.displayProf ? "" : "")}>
 									<li className="event-desc ">
