@@ -4,6 +4,9 @@
 .chat-page .event-content-list{
 	margin:0px;
 }
+.chat-page .event-row{
+	background-color: #062a66;
+}
 .chat-page .min-chat-event{
 	width:150px;
 	height: 150px;

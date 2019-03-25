@@ -3,6 +3,7 @@ import { api } from "../config/config"
 import EventDisplay from "./EventDisplay"
 import EventForm from "./EventForm"
 import UserDisplay from "./UserDisplay"
+import BlankUser from "../reusables/BlankUser"
 class EventCard extends React.Component{
 	constructor(props){
 		super(props)
@@ -66,36 +67,39 @@ class EventCard extends React.Component{
 			let likes = this.state.event.likes
 			for(let i = 0; i < likes.length; i++){
 				if(likes[i].matched){
-					matchList.push(<UserDisplay like={likes[i]} toggleInvite={this.toggleInvite} />)
+					matchList.push(<UserDisplay like={likes[i]} toggleInvite={this.toggleInvite} invited={true} />)
 				}else{
-					likeList.push(<UserDisplay like={likes[i]} toggleInvite={this.toggleInvite} />)
+					likeList.push(<UserDisplay like={likes[i]} toggleInvite={this.toggleInvite} invited={false} />)
 				}
 			}
-			// likeList = this.state.event.likes.map((like) =>{
-			// 	return(
-			// 		<UserDisplay like={like} />
-			// 	)
-			// })	
+		}
+		if(likeList.length === 0){				
+			likeList.push( <BlankUser image={require('../assets/plus.png')} message="Wait for someone to show interest in your event" />)
+		}
+		if(matchList.length === 0){
+			matchList.push( <BlankUser image={require('../assets/plus.png')} message="To invite someone, tap their profile picture and then invite" /> )
 		}
 		return(
-			<div className= "event-container">
-				<div className="card event-card" >
-					<div className="flip-container">
-						<div className={this.state.cardFlip ? "flipper flipped" : "flipper"}>
-							<div className="front">
-								<div className="event-bar">
-									<button onClick={this.flipCard}> Edit Event </button>
-									<button onClick={this.props.newEventTemplate}> Create New Event </button>
-									<button onClick={() => this.props.deleteEvent(this.state.event)}> Delete Event </button>
+			<div className="event-dash-container">
+				<div className= "event-container">
+					<div className="card event-card" >
+						<div className="flip-container">
+							<div className={this.state.cardFlip ? "flipper flipped" : "flipper"}>
+								<div className="front">
+									<div className="event-bar">
+										<button onClick={this.flipCard}> Edit Event </button>
+										<button onClick={this.props.newEventTemplate}> Create New Event </button>
+										<button onClick={() => this.props.deleteEvent(this.state.event)}> Delete Event </button>
+									</div>
+									<EventDisplay event={this.state.event} />
 								</div>
-								<EventDisplay event={this.state.event} />
-							</div>
-							<div className="back">
-								<EventForm 
-								event={this.state.event} 
-								submitEvent={this.props.submitEvent} 
-								flipCard={this.flipCard}
-								cancelNewEvent={this.props.cancelNewEvent} />
+								<div className="back">
+									<EventForm 
+									event={this.state.event} 
+									submitEvent={this.props.submitEvent} 
+									flipCard={this.flipCard}
+									cancelNewEvent={this.props.cancelNewEvent} />
+								</div>
 							</div>
 						</div>
 					</div>
@@ -103,14 +107,11 @@ class EventCard extends React.Component{
 				<div className="users-row" >
 					<h4> People Included in your event </h4>
 					<div className="users-included-container">
-						{matchList}
+						<div className="match-list"> {matchList} </div>
 					</div>
 					<h3> People interested in your event!</h3>
-					{(matchList.length === 0) &&
-						<p>To invite someone to your event, tap their profile, then tap "invite" </p>
-					}
 					<div className="users-list-container">
-						{likeList}
+						<div className="like-list" > {likeList} </div>
 					</div>
 				</div>
 			</div>
