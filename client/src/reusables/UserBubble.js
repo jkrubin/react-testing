@@ -24,7 +24,11 @@ class UserBubble extends React.Component{
 	}
 	render(){
 		return(
-			<div className={"list-profile-container " + (this.state.displayProf ? "show-profile" : "hide-profile")}>
+			<div className={"list-profile-container " + (this.state.displayProf ? "show-profile" : "hide-profile")}
+				 style={{
+					backgroundImage: "url("+require('../assets/cream-paper.png')+")",
+					backgroundRepeat: "repeat"
+			}}>
 				<div className="list-profile">
 					<img src={`data:${this.state.user.mimeType};base64,${this.state.user.profilePicture}`} 
 						alt="" 

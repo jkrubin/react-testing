@@ -10,7 +10,11 @@ class BlankUser extends React.Component{
 	}
 	render(){
 		return(
-			<div className="list-profile-container">
+			<div className="list-profile-container"
+				 style={{
+					backgroundImage: "url("+require('../assets/brushed-alum.png')+")",
+					backgroundRepeat: "repeat"
+				}}>
 				<div className="list-profile">
 					<img src={this.state.image} 
 						alt="" 

@@ -67,25 +67,38 @@ class ChatBox extends React.Component{
 		return(
 			<div className="container chat-box-container">
 				<div>
-					<ChatEvent event={this.state.event} />
-				</div>
-				<div className="chat-container">
-					<div className="chat-window-container">
-						<div className="chat-window">
-							{messages}
+					<div className="chat-container">
+						<div className="event-row" >
+							<div className="toggle-chat-button-container">
+								<button 
+									className="toggle-chat-button" 
+									onClick={() => this.props.toggleActiveChat(this.state.event.id)}> Toggle Chat </button>
+							</div>
+							<ChatEvent event={this.state.event} active={this.props.active} />
 						</div>
 					</div>
-					<div className="chat-input-container">
-						<input 
-							type="text" 
-							name="chatbox" 
-							value={this.state.chatbox} 
-							onChange={this.handleChange} 
-							onKeyPress={this.handleKeyPress}
-						/>
-						<button onClick={this.sendMessage}> Send </button>
-					</div>
 				</div>
+				{this.props.active &&
+					<div className="chat-container">
+						<div className="chat-window-container">
+							<div className="chat-window">
+								{messages}
+							</div>
+						</div>
+						<div className="chat-input-container">
+							<input 
+								type="text" 
+								name="chatbox" 
+								value={this.state.chatbox} 
+								onChange={this.handleChange} 
+								onKeyPress={this.handleKeyPress}
+							/>
+							<button onClick={this.sendMessage}> Send </button>
+						</div>
+						<div className="toggle-chat-window"> 
+						</div>
+					</div>
+				}
 			</div>
 		)
 	}

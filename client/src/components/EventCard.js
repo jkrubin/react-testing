@@ -109,7 +109,7 @@ class EventCard extends React.Component{
 					<div className="users-included-container">
 						<div className="match-list"> {matchList} </div>
 					</div>
-					<h3> People interested in your event!</h3>
+					<h4> People interested in your event!</h4>
 					<div className="users-list-container">
 						<div className="like-list" > {likeList} </div>
 					</div>

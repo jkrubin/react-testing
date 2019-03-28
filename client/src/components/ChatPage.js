@@ -9,12 +9,14 @@ class ChatPage extends React.Component{
 			eventArr: [],
 			myEventArr: [],
 			auth: context.auth,
-			isLoading: false
+			isLoading: false,
+			activeChat: 0,
 
 		}
-
+		this.getEventsFromAuth = this.getEventsFromAuth.bind(this)
+		this.toggleActiveChat = this.toggleActiveChat.bind(this)
 	}
-	componentWillMount(){
+	getEventsFromAuth(){
 		let data = {userId: this.state.auth.user.id}
 		this.setState({isLoading: true})
 		fetch(api + '/getInvitedEvents', {
@@ -69,19 +71,42 @@ class ChatPage extends React.Component{
 			this.setState({error: error, isLoading: false})
 		})
 	}
-
+	componentWillMount(){
+		this.getEventsFromAuth()
+	}
+	toggleActiveChat(eventId){
+		if(this.state.activeChat === eventId){
+			this.setState({activeChat: 0})
+		}else{
+			this.setState({activeChat: eventId})
+		}
+	}
+	async componentWillReceiveProps(nextProps, nextContext) {
+		await this.setState({auth: nextContext.auth})
+		this.getEventsFromAuth()
+	}
 	render(){
 		let myEventDisplay = this.state.myEventArr.map((event) => {
 			return(
 				<div className = "chat-page">
-					<ChatBox event= {event} userId= {this.state.auth.user.id} />
+					<ChatBox 
+						event= {event} 
+						userId= {this.state.auth.user.id} 
+						key={event.id} 
+						toggleActiveChat={this.toggleActiveChat}
+						active={this.state.activeChat === event.id} />
 				</div>
 			)
 		})
 		let eventsDisplay = this.state.eventArr.map((event) => {
 			return(
 				<div className = "chat-page">
-					<ChatBox event= {event} userId= {this.state.auth.user.id} />
+					<ChatBox 
+						event= {event} 
+						userId= {this.state.auth.user.id} 
+						key={event.id} 
+						toggleActiveChat={this.toggleActiveChat}
+						active={this.state.activeChat === event.id} />
 				</div>
 			)
 		})
