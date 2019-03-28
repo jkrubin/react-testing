@@ -21,26 +21,26 @@ function jwtSignUser (user) {
 }
 module.exports = {
 	async register(req, res) {
+		let image = false
+		let mimetype = ''
 		try{
-			let image = false
-			let mimetype = ''
-			try{
-				if(req.files.file){
-					image = req.files.file
-					mimetype = image.mimetype
-					image = await imagemin.buffer(image.data, {
-						plugins: [
-							imageminJpegtran(),
-							imageminPngquant({
-								quality: [0.6, 0.8]
-							})
-						]
-					})
-					image = await sharp(image).resize(300,300, {fit:'inside'}).toBuffer()
-				}
-			}catch(err){
-				console.log(err)
+			if(req.files.file){
+				image = req.files.file
+				mimetype = image.mimetype
+				image = await imagemin.buffer(image.data, {
+					plugins: [
+						imageminJpegtran(),
+						imageminPngquant({
+							quality: [0.6, 0.8]
+						})
+					]
+				})
+				image = await sharp(image).resize(300,300, {fit:'inside'}).toBuffer()
 			}
+		}catch(err){
+			console.log(err)
+		}
+		try{
 			const user = await users.create(req.body)
 			let userJson = user.toJSON()
 
@@ -136,28 +136,36 @@ module.exports = {
 		}
 	},
 	async updateUser(req, res) {
+		let image = false
+		let mimetype = ''
 		try{
-			let image = false
-			try{
-				if(req.files.file){
-					image = req.files.file
-					if(image.size > 50000){
-						return res.status(500).send({error: "Image is too large, please crop it or pick a smaller image"})
-					}
-				}
-			}catch(err){
-				console.log(err)
+			if(req.files.file){
+				image = req.files.file
+				mimetype = image.mimetype
+				image = await imagemin.buffer(image.data, {
+					plugins: [
+						imageminJpegtran(),
+						imageminPngquant({
+							quality: [0.6, 0.8]
+						})
+					]
+				})
+				image = await sharp(image).resize(300,300, {fit:'inside'}).toBuffer()
 			}
+		}catch(err){
+			console.log(err)
+		}
+		try{
 
 			const {id} = req.body
 			const user = await users.findOne({where:{id: id}})
 			const {name, email, bio} = req.body
 
 			if(image){
-				let encoded = image.data.toString('base64')
+				let encoded = image.toString('base64')
 				user.update({
 					profilePicture: encoded,
-					mimeType: image.mimetype,
+					mimeType: mimetype,
 					name: name,
 					email: email,
 					bio: bio
