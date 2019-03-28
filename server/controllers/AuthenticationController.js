@@ -3,6 +3,9 @@ const jwt = require('jsonwebtoken')
 const config = require('../config/authConfig')
 const fs = require('fs')
 const sharp = require('sharp')
+const imagemin = require('imagemin');
+const imageminJpegtran = require('imagemin-jpegtran');
+const imageminPngquant = require('imagemin-pngquant');
 
 function jwtSignUser (user) {
 	const ONE_WEEK = 60 * 60 * 24 * 7
@@ -24,7 +27,16 @@ module.exports = {
 				if(req.files.file){
 					image = req.files.file
 					if(image.size > 50000){
-						res.status(500).send({error: "This image is too large. Please crop or select a smaller image"})
+						image = await imagemin.buffer(image.data, {
+							plugins: [
+								imageminJpegtran(),
+								imageminPngquant({
+									quality: [0.6, 0.8]
+								})
+							]
+						})
+						console.log(image.size)
+						return res.status(500).send({error: "file compressed"})
 					}
 				}
 			}catch(err){
