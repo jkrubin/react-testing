@@ -54,7 +54,9 @@ class Profile extends React.Component{
 			data.append('bio', this.state.bio)
 			data.append('name', this.state.name)
 			data.append('id', this.state.id)
-			data.append('file', this.state.image, "profile.png")
+			if(this.state.image){
+				data.append('file', this.state.image, "profile.png")
+			}
 			this.context.updateUser(data)
 			.then(res => {
 				this.setState({

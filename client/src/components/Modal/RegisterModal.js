@@ -56,7 +56,7 @@ class RegisterModal extends React.Component{
 		data.append('email', this.state.email)
 		data.append('password', this.state.password)
 		data.append('name', this.state.name)
-		if(this.state.image != null){
+		if(this.state.image !== null){
 			data.append('file', this.state.image, "profile.png")			
 		}
 		// const data = {
