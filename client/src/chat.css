@@ -113,7 +113,20 @@
 .chat-container{
 	border:1px solid gray;
 }
+.chat-list{
+	position: fixed;
+    top: auto;
+    display: flex;
+    width: 300px;
+    flex-direction: column;
+    height: 100vh;
+    overflow: scroll;
+    left: 0px;
+}
 
+.active-chat{
+	margin-left: 300px;
+}
 @media (max-width: 570px){
 	.chat-page .chat-box-container{
 		margin:0px;

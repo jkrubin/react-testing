@@ -1,5 +1,5 @@
 import React from "react"
-import UserBubble from '../reusables/UserBubble'
+import UserBall from '../reusables/UserBall'
 class ChatEvent extends React.Component{
 	constructor(props){
 		super()
@@ -35,11 +35,9 @@ class ChatEvent extends React.Component{
 				let user = like.user
 				return (
 					<div className={"user-bubble-container " + (this.state.currentDisplayedUser === user.id ? "selected" : "")} >
-						<UserBubble 
-						user={user} 
-						displayProf={this.state.currentDisplayedUser === user.id} 
+						<UserBall 
+						like={like} 
 						key={user.id}
-						toggleCallback={() => this.displayUser(user.id)}
 						/>
 					</div>
 				)
@@ -72,11 +70,9 @@ class ChatEvent extends React.Component{
 					<ul className="event-content-list">
 						<li className="event-user">
 							<div className={"user-bubble-container " + (this.state.currentDisplayedUser === this.state.users.id ? "selected" : "")} >
-								<UserBubble 
+								<UserBall 
 								user={this.state.users} 
-								displayProf={this.state.currentDisplayedUser === this.state.users.id} 
 								key={this.state.users.id}
-								toggleCallback={() => this.displayUser(this.state.users.id)}
 								/>
 							</div>
 							{eventChatUsers}

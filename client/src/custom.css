@@ -12,7 +12,9 @@ div.error{
 .auth-group {
 	display:flex;
 }
-
+.dash-page .event-display {
+	position: relative;
+}
 .auth-group button {
 	margin: 10px;
 }
@@ -65,13 +67,22 @@ div.col-md-auto{
 	border-bottom: 2px solid black;
 }
 .event-image-container{
-	position: relative;
-	width:40%;
-	overflow: hidden;
-	width: auto;
-	height: 100%;
+	position: absolute;
+	top:0;
+	width: calc(100% - 17px);
+	height: auto;
+}
+.event-image-buffer{
+	display: block;
+	width: 100%;
 }
 .event-image{
+	height: 350px;
+	background-size: cover;
+}
+.event-image-top{
+	width: 100%;
+	height: auto;
 }
 .row{
 	margin: 0px;
@@ -80,6 +91,10 @@ div.col-md-auto{
 }
 .card-body{
 	padding: 0;
+	position: static;
+	height: 100vh;
+	max-height: 776px;
+	overflow: scroll;
 }
 .dash-page{
 	background-color: #daefef;
@@ -135,26 +150,15 @@ div.col-md-auto{
 }
 .card-img-top{
 	width: 100%;
-	max-width: 350px;
 }
 @media (max-width: 570px){
 	.front, .back {
 		padding:0px;
 	}
-	.event-image-container{
-		max-width: 570px;
-		width: 100%;
-		max-height: 350px;
-		overflow: hidden;
-		height: auto;
-	}
 	.card-img-top{
 		max-width: 100%;
 	}
-	.event-image{
-		width: 100%;
-		height: auto;
-	}
+
 }
 button.event-revert, button.event-submit{
 	margin-left:15px;
@@ -187,10 +191,19 @@ button.event-revert, button.event-submit{
 	text-align: left;
 }
 .homepage-card{
-	max-width: 750px;
+	width: 100%;
+	max-width: 500px;
 	min-width: 300px;
 }
+.slide{
+	max-width: 100%;
+}
+.carousel-container{
+	display:flex;
+	width: 100%;
+	justify-content: center;
 
+}
 .carousel-item.active.carousel-item{
 	display: flex;
 	justify-content: space-around;
@@ -203,7 +216,6 @@ button.event-revert, button.event-submit{
 }
 
 .landing-page .carousel-inner{
-	background-color: black;
 	z-index: 0;
 }
 
@@ -223,14 +235,14 @@ button.event-revert, button.event-submit{
 }
 .event-content-container{
 	flex:1;
-	min-width: 350px;
+	width:95%;
 	min-height: 150px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	position: relative;
-	margin-left: 15px;
-	margin-right: 15px;
+	margin-left: 25px;
+	margin-right: 25px;
 
 }
 .profile-event{
@@ -294,6 +306,15 @@ button.event-revert, button.event-submit{
 	align-items: left;
 	width:100%;
 	padding:0;
+	margin-top:350px;
+    background-color: rgb(255, 250, 250);
+    background-color: rgba(255, 250, 250, 0.85);
+    /* For IE 5.5 - 7*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+    /* For IE 8*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+    border-radius: 15px;
+    padding: 15px 15px 40px 15px;
 }
 .event-content-list li{
 	display: flex;
@@ -307,6 +328,12 @@ button.event-revert, button.event-submit{
 }
 .list-flush{
 	padding-left: 46px;
+}
+.event-user .list-flush{
+	padding-left: 4px;
+}
+.event-user .list-profile{
+	border: 2.5px #4286f4 solid;
 }
 .list-icon-container img{
 	margin-bottom: 2px;
@@ -339,7 +366,15 @@ button.event-revert, button.event-submit{
 	flex: auto;
 	border: 2.5px #4286f4 solid;
 }
-
+.border-container.matched{
+	border: 2.5px solid green;
+}
+.border-container.liked{
+	border: 2.5px solid yellow;
+}
+.list-profile-ball{
+	margin-right: 15px;
+}
 .list-profile-container{
 	background-color: #D4AF37;
 	position: relative;
@@ -358,6 +393,11 @@ button.event-revert, button.event-submit{
 	height:100px;
 	border-radius: 50px;
 	overflow: hidden;
+}
+.matched-container, .liked-container{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: ;
 }
 .list-profile img{
 	width: 120%;

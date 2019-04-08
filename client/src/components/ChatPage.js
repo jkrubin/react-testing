@@ -2,6 +2,7 @@ import React from "react"
 import { api } from "../config/config"
 import { AuthContext } from "../Contexts/AuthContext"
 import ChatBox from './ChatBox'
+import ChatEvent from './ChatEvent'
 class ChatPage extends React.Component{
 	constructor(props, context){
 		super(props, context)
@@ -89,6 +90,42 @@ class ChatPage extends React.Component{
 		let myEventDisplay = this.state.myEventArr.map((event) => {
 			return(
 				<div className = "chat-page">
+					<div>
+						<div className="chat-container">
+							<div className="event-row" >
+								<div className="toggle-chat-button-container">
+									<button 
+										className="toggle-chat-button" 
+										onClick={() => this.toggleActiveChat(event.id)}> Toggle Chat </button>
+								</div>
+								<ChatEvent event={event} active={this.state.activeChat === event.id} />
+							</div>
+						</div>
+					</div>
+				</div>
+			)
+		})
+		let eventsDisplay = this.state.eventArr.map((event) => {
+			return(
+				<div className = "chat-page">
+					<div>
+						<div className="chat-container">
+							<div className="event-row" >
+								<div className="toggle-chat-button-container">
+									<button 
+										className="toggle-chat-button" 
+										onClick={() => this.toggleActiveChat(event.id)}> Toggle Chat </button>
+								</div>
+								<ChatEvent event={event} active={this.state.activeChat === event.id} />
+							</div>
+						</div>
+					</div>
+				</div>
+			)
+		})
+		let myEventChatbox = this.state.myEventArr.map((event) => {
+			return(
+				<div className = "chat-page">
 					<ChatBox 
 						event= {event} 
 						userId= {this.state.auth.user.id} 
@@ -98,7 +135,7 @@ class ChatPage extends React.Component{
 				</div>
 			)
 		})
-		let eventsDisplay = this.state.eventArr.map((event) => {
+		let eventsChatbox = this.state.eventArr.map((event) => {
 			return(
 				<div className = "chat-page">
 					<ChatBox 
@@ -111,14 +148,17 @@ class ChatPage extends React.Component{
 			)
 		})
 		return(
-			<div>
-				<div>
+			<div className="chat-page-container">
+				<div className="chat-list">
 					<h2> My hosted Events: </h2>
-					<div> 
-						{myEventDisplay}
-					</div>
+					{myEventDisplay}
 					<h2> Events You Matched with: </h2>
-					<div> {eventsDisplay} </div>
+					{eventsDisplay}
+				</div>
+				<div className="active-chat">
+					<p> Active Chat: </p>
+					{myEventChatbox}
+					{eventsChatbox}
 				</div>
 			</div>
 		)

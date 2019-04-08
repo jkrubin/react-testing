@@ -2,6 +2,7 @@ import React from "react"
 import { AuthContext } from "../Contexts/AuthContext"
 import { api } from "../config/config"
 import TestDisplay from "./TestDisplay"
+import EventCarousel from "./Carousel/Carousel"
 import {Carousel} from 'react-bootstrap'
 import openSocket from 'socket.io-client';
 
@@ -73,12 +74,10 @@ class Landing extends React.Component{
 					</p>
 					<h2> Events Around me: </h2>
 				</div>
-				<Carousel interval = {null}>
-					{eventGrid}
-				</Carousel>
-				<div className="container">
-					<h1> More content </h1>
-					<div style={{height: '400px'}}> content </div>
+				<div className="carousel-container">
+					<Carousel interval = {null}>
+						{eventGrid}
+					</Carousel>
 				</div>
 			</div>
 		)

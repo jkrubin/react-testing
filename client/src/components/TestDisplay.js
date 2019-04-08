@@ -6,12 +6,14 @@ class TestDisplay extends React.Component{
 		super()
 		this.state = {
 			...props.event,
-			userId: props.userId,
+			authenticatedUser: props.userId,
 			isLoading: false,
 			error: false,
 			displayProf: false,
 			submitLike: false,
 			likeMessage: "",
+			imgHeight: null,
+			eventWidth: null,
 		}
 		this.submitLike = this.submitLike.bind(this)
 		this.deleteLike = this.deleteLike.bind(this)
@@ -38,7 +40,7 @@ class TestDisplay extends React.Component{
 			isLoading: true
 		})
 		let data = {
-			userId: this.state.userId,
+			userId: this.state.authenticatedUser,
 			EventId: this.state.id,
 			message: this.state.likeMessage
 		}
@@ -107,10 +109,16 @@ class TestDisplay extends React.Component{
 			this.setState({error: error, isLoading: false})
 		})	
 	}
+	componentDidMount(){
+		let imgHeight = document.getElementById('event-img').clientHeight
+		let eventWidth = document.getElementsByClassName('event-row')[0].width
+		console.log(eventWidth)
+		this.setState({imgHeight, eventWidth})
+	}
 	render(){
 		let displayDate = new Date(this.state.date).toLocaleString('en-US').substring(0,9)
 		let likeDisplay
-		if(this.state.userId !== 0){
+		if(this.state.authenticatedUser !== 0 && this.state.likes && this.state.authenticatedUser !== this.state.userId){
 			if(this.state.likes.length === 0){
 				likeDisplay = <button type="button" className="btn btn-primary" onClick={this.toggleLike}> heart this event! </button>
 			}else{
@@ -118,12 +126,14 @@ class TestDisplay extends React.Component{
 			}
 		}
 		return(
-			<div>
+			<div className="event-display">
 				<div className="card-body">
 					<div className="row event-row" >
-						<div className="event-image-container">
-							<div className="event-image">
-									<img className="card-img-top" src={this.state.image} alt="" />
+						<div className="event-image-container" id="event-img">
+							<div className="event-image"
+								style={{
+								backgroundImage: "url("+this.state.image+")",
+							}}>
 							</div>
 						</div>
 						<div className="event-content-container">
@@ -133,63 +143,109 @@ class TestDisplay extends React.Component{
 										<h3 className="card-title"> {this.state.name} </h3>
 									</div>
 								</li>
-								<li className="event-user">
-									<UserBubble 
-									user={this.state.users} 
-									displayProf={this.state.displayProf} 
-									toggleCallback={this.toggleProfile} />
-								</li>
-								<div className={(this.state.displayProf ? "" : "")}>
-									<li className="event-desc ">
+								{this.state.users && 
+									<div>
+									<li className="event-user ">
 										<div className="list-icon-container list-flush ">
-											<img
-												src={require('../assets/infoIcon.png')}
-												height='15'
-												width='15'
-												alt=""
-											/>
+											<div className="list-profile">
+												<img src={`data:${this.state.users.mimeType};base64,${this.state.users.profilePicture}`} 
+													alt="" 
+													className="event-profile-pic" />
+											</div>
 											<div className="border-container"> </div>
 										</div>
 										<div className="event-desc-div list-content">
-											<h6 className="card-text">Description: </h6>
-											<p className={"card-text " + (this.state.displayProf ? "hide-event-info" : "")}> {this.state.description} </p>
+											<h6 className="card-text">Submitted By: </h6>
+											<p className="card-text "> {this.state.users.name} </p>
+											<h6 className="card-text">Bio: </h6>
+											<p className="card-text "> {this.state.users.bio} </p>
 										</div>
 									</li>
-									<li className="event-loc ">
-										<div className="list-icon-container list-flush">
-											<img
-												src={require('../assets/locationIcon.png')}
-												height='15'
-												width='15'
-												alt=""
-											/>
-											<div className="border-container"> </div>
+									</div>
+								}
+								<li className="event-desc ">
+									<div className="list-icon-container list-flush ">
+										<img
+											src={require('../assets/infoIcon.png')}
+											height='15'
+											width='15'
+											alt=""
+										/>
+										<div className="border-container"> </div>
+									</div>
+									<div className="event-desc-div list-content">
+										<h6 className="card-text">Description: </h6>
+										<p className="card-text "> {this.state.description} </p>
+									</div>
+								</li>
+								<li className="event-loc ">
+									<div className="list-icon-container list-flush">
+										<img
+											src={require('../assets/locationIcon.png')}
+											height='15'
+											width='15'
+											alt=""
+										/>
+										<div className="border-container"> </div>
+									</div>
+									<div className="event-location-div list-content">
+										<h6 className="card-text">Location: </h6>
+										<p className="card-text "> 
+											At {this.state.location}
+										</p>
+									</div>
+								</li>
+								<li className="event-datetime ">
+									<div className="list-icon-container list-flush">
+										<img
+											src={require('../assets/dateIcon.png')}
+											height='15'
+											width='15'
+											alt=""
+										/>
+										<div className="border-container"> </div>
+									</div>
+									<div className="event-date-div list-content">
+										<h6 className="card-text">Date: </h6>
+										<p className="card-text ">
+											{displayDate}
+										</p>
+									</div>
+								</li>
+								<li className="event-matched ">
+									<div className="list-icon-container list-flush">
+										<img
+											src={require('../assets/dateIcon.png')}
+											height='15'
+											width='15'
+											alt=""
+										/>
+										<div className="border-container matched"> </div>
+									</div>
+									<div className="event-date-div list-content">
+										<h6 className="card-text">Matched with Event: </h6>
+										<div className="matched-container">
+											{this.props.matched}
 										</div>
-										<div className="event-location-div list-content">
-											<h6 className="card-text">Location: </h6>
-											<p className={"card-text " + (this.state.displayProf ? "hide-event-info" : "")}> 
-												At {this.state.location}
-											</p>
+									</div>
+								</li>
+								<li className="event-liked ">
+									<div className="list-icon-container list-flush">
+										<img
+											src={require('../assets/dateIcon.png')}
+											height='15'
+											width='15'
+											alt=""
+										/>
+										<div className="border-container liked"> </div>
+									</div>
+									<div className="event-date-div list-content">
+										<h6 className="card-text">Interested in Event: </h6>
+										<div className="liked-container">
+											{this.props.liked}
 										</div>
-									</li>
-									<li className="event-datetime ">
-										<div className="list-icon-container list-flush">
-											<img
-												src={require('../assets/dateIcon.png')}
-												height='15'
-												width='15'
-												alt=""
-											/>
-											<div className="border-container"> </div>
-										</div>
-										<div className="event-date-div list-content">
-											<h6 className="card-text">Date: </h6>
-											<p className={"card-text " + (this.state.displayProf ? "hide-event-info" : "")}>
-												{displayDate}
-											</p>
-										</div>
-									</li>
-								</div>
+									</div>
+								</li>
 							</ul>
 							<div className="like-container">
 								{likeDisplay}

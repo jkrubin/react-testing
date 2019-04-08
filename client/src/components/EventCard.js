@@ -1,9 +1,12 @@
-import React from "react"
+ import React from "react"
 import { api } from "../config/config"
 import EventDisplay from "./EventDisplay"
+import TestDisplay from "./TestDisplay"
 import EventForm from "./EventForm"
 import UserDisplay from "./UserDisplay"
 import BlankUser from "../reusables/BlankUser"
+import UserBall from "../reusables/UserBall"
+
 class EventCard extends React.Component{
 	constructor(props){
 		super(props)
@@ -67,9 +70,9 @@ class EventCard extends React.Component{
 			let likes = this.state.event.likes
 			for(let i = 0; i < likes.length; i++){
 				if(likes[i].matched){
-					matchList.push(<UserDisplay like={likes[i]} toggleInvite={this.toggleInvite} invited={true} />)
+					matchList.push(<UserBall like={likes[i]} toggleInvite={this.toggleInvite} invited={true} />)
 				}else{
-					likeList.push(<UserDisplay like={likes[i]} toggleInvite={this.toggleInvite} invited={false} />)
+					likeList.push(<UserBall like={likes[i]} toggleInvite={this.toggleInvite} invited={false} />)
 				}
 			}
 		}
@@ -91,7 +94,7 @@ class EventCard extends React.Component{
 										<button onClick={this.props.newEventTemplate}> Create New Event </button>
 										<button onClick={() => this.props.deleteEvent(this.state.event)}> Delete Event </button>
 									</div>
-									<EventDisplay event={this.state.event} />
+									<TestDisplay event={this.state.event} userId= {0} liked={likeList} matched={matchList} />
 								</div>
 								<div className="back">
 									<EventForm 
@@ -102,16 +105,6 @@ class EventCard extends React.Component{
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div className="users-row" >
-					<h4> People Included in your event </h4>
-					<div className="users-included-container">
-						<div className="match-list"> {matchList} </div>
-					</div>
-					<h4> People interested in your event!</h4>
-					<div className="users-list-container">
-						<div className="like-list" > {likeList} </div>
 					</div>
 				</div>
 			</div>
