@@ -8,24 +8,13 @@ class ChatEvent extends React.Component{
 			isLoading: false,
 			displayProf: false,
 			displayEventDetails: false,
-			currentDisplayedUser: null,
 		}
 		this.toggleEventDetails = this.toggleEventDetails.bind(this)
-		this.displayUser = this.displayUser.bind(this)
 	}
 	toggleEventDetails(){
 		this.setState((prevState) =>{
 			return({displayEventDetails: !prevState.displayEventDetails})
 		})
-	}
-	displayUser(userId){
-		if(this.state.currentDisplayedUser === userId){
-			this.setState({currentDisplayedUser: null})
-		}else{
-			this.setState({
-				currentDisplayedUser: userId
-			})
-		}
 	}
 	render(){
 		let displayDate = new Date(this.state.date).toLocaleString('en-US').substring(0,9)
@@ -34,7 +23,7 @@ class ChatEvent extends React.Component{
 			eventChatUsers = this.state.chat[0].event.likes.map((like) => {
 				let user = like.user
 				return (
-					<div className={"user-bubble-container " + (this.state.currentDisplayedUser === user.id ? "selected" : "")} >
+					<div className="user-bubble-container " >
 						<UserBall 
 						like={like} 
 						key={user.id}
@@ -44,9 +33,9 @@ class ChatEvent extends React.Component{
 			})
 		}
 		return(
-			<div>
-				<div className="event-image-col">
-					<div className={"event-image-container " + (this.state.displayEventDetails ? "" : "min-chat-event")}>
+			<div className="event-chat-row">
+				<div className="chat-event-display">
+					<div className="event-image-container ">
 						<div className="event-image">
 							<img 
 								className="card-img-top" 
@@ -56,32 +45,18 @@ class ChatEvent extends React.Component{
 							/>
 						</div>
 					</div>
-					<div className="event-name-div">
-						<h3 className="card-title"> {this.state.name} </h3>
+					<div className="chat-event-right" onClick={()=> {this.props.toggleActiveChat(this.state.id)}}>
+						<div className="event-chat-info">
+							<div className="event-name-div">
+								<h5 className="card-title"> {this.state.name} </h5>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div 
-					className="event-content-container" 
-					style={{
-						backgroundImage: "url("+require('../assets/brushed-alum.png')+")",
-						backgroundRepeat: "repeat"
-
-					}}>
-					<ul className="event-content-list">
-						<li className="event-user">
-							<div className={"user-bubble-container " + (this.state.currentDisplayedUser === this.state.users.id ? "selected" : "")} >
-								<UserBall 
-								user={this.state.users} 
-								key={this.state.users.id}
-								/>
-							</div>
-							{eventChatUsers}
-						</li>
-					</ul>
-				</div>
 				<ul className="event-content-list">
-					<div className="event-details-container">
-						{this.state.displayEventDetails &&
+					<div className="event-details-container event-chat-details"
+						 style={{maxHeight:this.state.displayEventDetails? "1000px": "0"}}>
+						{//this.state.displayEventDetails &&
 							<div>
 								<li className="event-desc ">
 									<div className="list-icon-container list-flush ">

@@ -93,12 +93,7 @@ class ChatPage extends React.Component{
 					<div>
 						<div className="chat-container">
 							<div className="event-row" >
-								<div className="toggle-chat-button-container">
-									<button 
-										className="toggle-chat-button" 
-										onClick={() => this.toggleActiveChat(event.id)}> Toggle Chat </button>
-								</div>
-								<ChatEvent event={event} active={this.state.activeChat === event.id} />
+								<ChatEvent event={event} active={this.state.activeChat === event.id} toggleActiveChat={this.toggleActiveChat}/>
 							</div>
 						</div>
 					</div>
@@ -111,12 +106,7 @@ class ChatPage extends React.Component{
 					<div>
 						<div className="chat-container">
 							<div className="event-row" >
-								<div className="toggle-chat-button-container">
-									<button 
-										className="toggle-chat-button" 
-										onClick={() => this.toggleActiveChat(event.id)}> Toggle Chat </button>
-								</div>
-								<ChatEvent event={event} active={this.state.activeChat === event.id} />
+								<ChatEvent event={event} active={this.state.activeChat === event.id} toggleActiveChat={this.toggleActiveChat} />
 							</div>
 						</div>
 					</div>
@@ -156,7 +146,6 @@ class ChatPage extends React.Component{
 					{eventsDisplay}
 				</div>
 				<div className="active-chat">
-					<p> Active Chat: </p>
 					{myEventChatbox}
 					{eventsChatbox}
 				</div>

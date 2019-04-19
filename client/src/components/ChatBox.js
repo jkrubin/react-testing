@@ -3,8 +3,9 @@ import openSocket from 'socket.io-client'
 import { api } from "../config/config"
 import ChatEvent from "./ChatEvent"
 import MessageDisplay from "./MessageDisplay"
+import UserBall from '../reusables/UserBall'
 import '../chat.css'
-class ChatBox extends React.Component{
+class ChatBox extends React.Component{ 
 	constructor(props){
 		super(props)
 		this.state = {
@@ -64,29 +65,56 @@ class ChatBox extends React.Component{
 				<MessageDisplay message={message} user={user} isMe={(this.state.userId === message.userId)} />
 			)
 		})
+		let eventChatUsers = []
+		if(this.state.event.chat.length){
+			eventChatUsers = this.state.event.chat[0].event.likes.map((like) => {
+				let user = like.user
+				return (
+					<div className="user-bubble-container " >
+						<UserBall 
+						like={like} 
+						key={user.id}
+						/>
+					</div>
+				)
+			})
+		}
 		return(
-			<div className="container chat-box-container">
-				{this.props.active &&
-					<div className="chat-container">
-						<div className="chat-window-container">
-							<div className="chat-window">
-								{messages}
+			<div className="container chat-box-container"
+				style={{maxWidth: this.props.active? "10000px" : "0px"}}>
+				<h3> {this.state.event.name} </h3>
+				<div className="chat-info">
+					<ul className="event-chat-user-list" >
+						<li className="event-user">
+							<div className="user-bubble-container ">
+								<UserBall 
+								user={this.state.event.users} 
+								key={this.state.event.users.id}
+								/>
 							</div>
-						</div>
-						<div className="chat-input-container">
-							<input 
-								type="text" 
-								name="chatbox" 
-								value={this.state.chatbox} 
-								onChange={this.handleChange} 
-								onKeyPress={this.handleKeyPress}
-							/>
-							<button onClick={this.sendMessage}> Send </button>
-						</div>
-						<div className="toggle-chat-window"> 
+							{eventChatUsers}
+						</li>
+					</ul>
+				</div>
+				<div className="chat-container">
+					<div className="chat-window-container">
+						<div className="chat-window">
+							{messages}
 						</div>
 					</div>
-				}
+					<div className="chat-input-container">
+						<input 
+							type="text" 
+							name="chatbox" 
+							value={this.state.chatbox} 
+							onChange={this.handleChange} 
+							onKeyPress={this.handleKeyPress}
+						/>
+						<button onClick={this.sendMessage}> Send </button>
+					</div>
+					<div className="toggle-chat-window"> 
+					</div>
+				</div>
 			</div>
 		)
 	}

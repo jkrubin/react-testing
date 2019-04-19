@@ -14,6 +14,9 @@ class Landing extends React.Component{
 			events: [],
 			isLoading: false,
 			error: "",
+			prev: null,
+			active: 0,
+			next: 1,
 
 		}
 	}
@@ -43,7 +46,10 @@ class Landing extends React.Component{
 			}else if(events.eventArr){
 				this.setState({
 					events: events.eventArr,
-					isLoading: false
+					prev: (events.eventArr.length - 1),
+					active: 0,
+					next: 1,
+					isLoading: false,
 				})
 			}
 		})
@@ -52,13 +58,25 @@ class Landing extends React.Component{
 		})	
 	}
 	render(){
+		/*
+			<Carousel interval = {null}>
+				{eventGrid}
+			</Carousel>
+		*/
+		// let eventGrid = this.state.events.map((event) => {
+		// 	return(
+		// 		<Carousel.Item>
+		// 			<div className = "card homepage-card">
+		// 				<TestDisplay event={event} userId={this.state.auth.user.id} /> 
+		// 			</div>
+		// 		</Carousel.Item>
+		// 	)
+		// })
 		let eventGrid = this.state.events.map((event) => {
 			return(
-				<Carousel.Item>
-					<div className = "card homepage-card">
-						<TestDisplay event={event} userId={this.state.auth.user.id} /> 
-					</div>
-				</Carousel.Item>
+				<div className = "card homepage-card">
+					<TestDisplay event={event} userId={this.state.auth.user.id} /> 
+				</div>
 			)
 		})
 		return(
@@ -75,9 +93,7 @@ class Landing extends React.Component{
 					<h2> Events Around me: </h2>
 				</div>
 				<div className="carousel-container">
-					<Carousel interval = {null}>
-						{eventGrid}
-					</Carousel>
+					{eventGrid}
 				</div>
 			</div>
 		)

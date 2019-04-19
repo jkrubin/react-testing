@@ -120,9 +120,23 @@ class TestDisplay extends React.Component{
 		let likeDisplay
 		if(this.state.authenticatedUser !== 0 && this.state.likes && this.state.authenticatedUser !== this.state.userId){
 			if(this.state.likes.length === 0){
-				likeDisplay = <button type="button" className="btn btn-primary" onClick={this.toggleLike}> heart this event! </button>
+				likeDisplay = (
+				<img
+					src={require('../assets/heart-empty.png')}
+					height='85'
+					width='70'
+					onClick={this.toggleLike}
+					alt=""
+				/>)
 			}else{
-				likeDisplay = <button type="button" className="btn btn-primary" onClick={this.deleteLike}> You like this Event </button>
+				likeDisplay = (
+				<img
+					src={require('../assets/heart-full.png')}
+					height='85'
+					width='70'
+					onClick={this.deleteLike}
+					alt=""
+				/>)
 			}
 		}
 		return(
@@ -135,6 +149,9 @@ class TestDisplay extends React.Component{
 								backgroundImage: "url("+this.state.image+")",
 							}}>
 							</div>
+						</div>
+						<div className="like-container">
+							{likeDisplay}
 						</div>
 						<div className="event-content-container">
 							<ul className="event-content-list">
@@ -247,9 +264,6 @@ class TestDisplay extends React.Component{
 									</div>
 								</li>
 							</ul>
-							<div className="like-container">
-								{likeDisplay}
-							</div>
 							{this.state.submitLike &&
 								<div className="like-submit-container">
 									<div className="like-form-container">
