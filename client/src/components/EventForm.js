@@ -80,8 +80,7 @@ class EventForm extends React.Component{
 	          		</div>
 	          		<div className="form-group">
 		          		<label>Describe your event! </label>
-		          		<input className="form-control"
-		          		type="text"
+		          		<textarea className="form-control"
 		          		name="description"
 		          		value={this.state.description}
 		          		onChange={this.handleChange}/>

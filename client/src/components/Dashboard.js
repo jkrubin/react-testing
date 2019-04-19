@@ -194,11 +194,6 @@ class Dashboard extends React.Component{
 			<div>
 				<div className="dash-page">
 					<div className="dash-area row">
-						<div className="profile-area col-lg">
-							<h1> Hello {this.state.auth.user.name} </h1>
-							<p> Manage your account settings and your active events</p>
-							<Profile user={this.state.auth.user} token={this.state.auth.token} />
-						</div>
 						<div className="events-area col-lg">
 							<h2> My Events </h2>
 							<p>Add and edit your events. See who showed interest in your event and invite

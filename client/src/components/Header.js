@@ -4,6 +4,7 @@ import {AuthConsumer} from '../Contexts/AuthContext'
 import {Link} from 'react-router-dom'
 import LoginModal from './Modal/LoginModal'
 import RegisterModal from './Modal/RegisterModal'
+import ProfileModal from './Modal/ProfileModal'
 class Header extends React.Component{
 	constructor(){
 		super()
@@ -37,12 +38,14 @@ class Header extends React.Component{
 				      {({ isAuth, login, logout, auth }) => (
 				        <div>
 				          {isAuth ? (
-				          	<div>
-				          	  <span> Hello {auth.user.email} </span>
-				          	  <Link className="nav-link" to="/dashboard" > Account </Link>
-				              <button onClick = {logout}>
-				                logout
-				              </button>
+				          	<div className="nav-right">
+				          	  <ProfileModal />
+				          	  <div className="nav-account">
+					          	  <Link className="nav-link" to="/dashboard" > Account </Link>
+					              <button onClick = {logout}>
+					                logout
+					              </button>
+				              </div>
 				            </div>
 				          ) : (
 				          	<div className="auth-group">

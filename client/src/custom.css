@@ -34,10 +34,13 @@ div.landing-page{
 	flex-direction: column;
 }
 div.event-card{
-	width: 100%;
+	max-width: 450px;
 	height: auto;
+	border-radius: 25px;
 }
-
+.events-area .carousel{
+	max-width: 450px;
+}
 .users-included-container{
 	background-color: #3bcc5c;
 	padding: 5px;
@@ -120,18 +123,14 @@ div.col-md-auto{
 	transition: 0.6s;
 	transform-style: preserve-3d;
 	height: auto;
-	padding-bottom: 15px;
 	position: relative;
 }
 
 /* hide back of pane during swap */
 .front, .back {
 	backface-visibility: hidden;
-	top:15px;
 	width: 100%;
 	left:0px;
-	padding-left: 30px;
-	padding-right: 30px;
 
 }
 
@@ -150,6 +149,13 @@ div.col-md-auto{
 }
 .card-img-top{
 	width: 100%;
+}
+
+.event-bar{
+	position: absolute;
+	z-index: 3;
+	display: flex;
+	align-content: space-between;
 }
 @media (max-width: 570px){
 	.front, .back {
@@ -236,6 +242,9 @@ button.event-revert, button.event-submit{
 }
 .events-area{
 	padding:0px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
 }
 .event-content-container{
 	flex:1;
