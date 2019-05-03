@@ -1,6 +1,5 @@
 import React from "react"
 import { api } from "../config/config"
-import UserBubble from '../reusables/UserBubble'
 class TestDisplay extends React.Component{
 	constructor(props){
 		super()
@@ -54,7 +53,6 @@ class TestDisplay extends React.Component{
 		.then(res => res.json())
 		.then((data) => {
 			const like = data
-			console.log(like)
 			if(like.error){
 				this.setState({
 					error: like.error,
@@ -91,7 +89,6 @@ class TestDisplay extends React.Component{
 		.then(res => res.json())
 		.then((data) => {
 			const like = data
-			console.log(like)
 			if(like.error){
 				this.setState({
 					error: like.error,
@@ -112,7 +109,6 @@ class TestDisplay extends React.Component{
 	componentDidMount(){
 		let imgHeight = document.getElementById('event-img').clientHeight
 		let eventWidth = document.getElementsByClassName('event-row')[0].width
-		console.log(eventWidth)
 		this.setState({imgHeight, eventWidth})
 	}
 	render(){

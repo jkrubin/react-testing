@@ -1,10 +1,7 @@
- import React from "react"
+import React from "react"
 import { api } from "../config/config"
-import EventDisplay from "./EventDisplay"
 import TestDisplay from "./TestDisplay"
 import EventForm from "./EventForm"
-import UserDisplay from "./UserDisplay"
-import BlankUser from "../reusables/BlankUser"
 import UserBall from "../reusables/UserBall"
 
 class EventCard extends React.Component{
@@ -70,18 +67,13 @@ class EventCard extends React.Component{
 			let likes = this.state.event.likes
 			for(let i = 0; i < likes.length; i++){
 				if(likes[i].matched){
-					matchList.push(<UserBall like={likes[i]} toggleInvite={this.toggleInvite} invited={true} />)
+					matchList.push(<UserBall key={likes[i].id} like={likes[i]} toggleInvite={this.toggleInvite} invited={true} />)
 				}else{
-					likeList.push(<UserBall like={likes[i]} toggleInvite={this.toggleInvite} invited={false} />)
+					likeList.push(<UserBall key={likes[i].id} like={likes[i]} toggleInvite={this.toggleInvite} invited={false} />)
 				}
 			}
 		}
-		if(likeList.length === 0){				
-			likeList.push( <BlankUser image={require('../assets/plus.png')} message="Wait for someone to show interest in your event" />)
-		}
-		if(matchList.length === 0){
-			matchList.push( <BlankUser image={require('../assets/plus.png')} message="To invite someone, tap their profile picture and then invite" /> )
-		}
+
 		return(
 			<div className="event-dash-container">
 				<div className= "event-container">
@@ -90,9 +82,9 @@ class EventCard extends React.Component{
 							<div className={this.state.cardFlip ? "flipper flipped" : "flipper"}>
 								<div className="front">
 									<div className="event-bar">
-										<button onClick={this.flipCard}> Edit Event </button>
-										<button onClick={this.props.newEventTemplate}> Create New Event </button>
-										<button onClick={() => this.props.deleteEvent(this.state.event)}> Delete Event </button>
+										<button onClick={() => this.props.deleteEvent(this.state.event)} title="Delete Event"> <img alt="Delete Event" src={require('../assets/deleteIcon.png')} /> </button>
+										<button onClick={this.props.newEventTemplate} title="Create Event"> <img alt="Create Event" src={require('../assets/createIcon.png')} /> </button>
+										<button onClick={this.flipCard} title="Edit Event"> <img alt="Edit Event" src={require('../assets/editIcon.png')} /> </button>
 									</div>
 									<TestDisplay event={this.state.event} userId= {0} liked={likeList} matched={matchList} />
 								</div>

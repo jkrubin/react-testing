@@ -26,7 +26,7 @@ class Profile extends React.Component{
 		this.setState({image: event.target.files[0]})
 	}
 	componentWillReceiveProps(nextProps) {
-		const {name, email, bio, image} = nextProps.user
+		const {name, email, bio} = nextProps.user
 		this.setState({originalUser: {name, email, bio}, ...nextProps.user})
 	}
 	rollback(){

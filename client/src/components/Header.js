@@ -17,21 +17,27 @@ class Header extends React.Component{
 		  <header>
 			<Navbar bg="light" expand="md">
 				<Link to="/" >
-					<img
-						src={require('../assets/testLogo.png')}
-						height='100'
-						width='100'
-						alt=""
-					/>
+					<div className="logo-header">
+						<img
+							src={require('../assets/Logo.jpg')}
+							height='100'
+							width='100'
+							alt=""
+						/>
+					</div>
 				</Link>
 				<Navbar.Brand >TABLE FOR 2</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
-					<Nav className="mr-auto">
-						<Link className="nav-link float-right" to="/"> Homepage </Link>
-						<Link className="nav-link" to="/dashboard"> My Account </Link>
-						<Link className="nav-link" to="/chat"> Chat </Link>
-					</Nav>
+				<AuthConsumer>
+					{({ isAuth, login, logout, auth }) => (
+						<Nav className="mr-auto">
+							<Link className="nav-link float-right" to="/"> Homepage </Link>
+							<Link className={isAuth? "nav-link": "nav-link disabled"} to="/dashboard"> My Account </Link>
+							<Link className={isAuth? "nav-link": "nav-link disabled"} to="/chat"> Chat </Link>
+						</Nav>
+					)}
+			    </AuthConsumer>
 				</Navbar.Collapse>
 				<span className="navbar-text">
 					<AuthConsumer>

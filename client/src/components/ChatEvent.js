@@ -1,5 +1,4 @@
 import React from "react"
-import UserBall from '../reusables/UserBall'
 class ChatEvent extends React.Component{
 	constructor(props){
 		super()
@@ -18,20 +17,7 @@ class ChatEvent extends React.Component{
 	}
 	render(){
 		let displayDate = new Date(this.state.date).toLocaleString('en-US').substring(0,9)
-		let eventChatUsers = []
-		if(this.state.chat.length){
-			eventChatUsers = this.state.chat[0].event.likes.map((like) => {
-				let user = like.user
-				return (
-					<div className="user-bubble-container " >
-						<UserBall 
-						like={like} 
-						key={user.id}
-						/>
-					</div>
-				)
-			})
-		}
+
 		return(
 			<div className="event-chat-row">
 				<div className="chat-event-display">

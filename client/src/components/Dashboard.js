@@ -1,7 +1,6 @@
 import React from "react"
 import { AuthContext } from "../Contexts/AuthContext"
 import { api } from "../config/config"
-import Profile from "./Profile"
 import EventCard from "./EventCard"
 import {Carousel} from 'react-bootstrap'
 
@@ -178,7 +177,7 @@ class Dashboard extends React.Component{
 		}
 		let eventGrid = this.state.events.map((event) => {
 			return(
-				<Carousel.Item>
+				<Carousel.Item key={event.id}>
 					<EventCard 
 					event={event} 
 					submitEvent={this.submitEvent} 

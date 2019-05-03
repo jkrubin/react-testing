@@ -1,7 +1,6 @@
 import React from "react"
 import openSocket from 'socket.io-client'
 import { api } from "../config/config"
-import ChatEvent from "./ChatEvent"
 import MessageDisplay from "./MessageDisplay"
 import UserBall from '../reusables/UserBall'
 import '../chat.css'
@@ -62,7 +61,7 @@ class ChatBox extends React.Component{
 				user = like[0].user
 			}
 			return(
-				<MessageDisplay message={message} user={user} isMe={(this.state.userId === message.userId)} />
+				<MessageDisplay key={this.state.messages.length} message={message} user={user} isMe={(this.state.userId === message.userId)} />
 			)
 		})
 		let eventChatUsers = []
@@ -70,7 +69,7 @@ class ChatBox extends React.Component{
 			eventChatUsers = this.state.event.chat[0].event.likes.map((like) => {
 				let user = like.user
 				return (
-					<div className="user-bubble-container " >
+					<div key={user.id} className="user-bubble-container " >
 						<UserBall 
 						like={like} 
 						key={user.id}

@@ -2,9 +2,7 @@ import React from "react"
 import { AuthContext } from "../Contexts/AuthContext"
 import { api } from "../config/config"
 import TestDisplay from "./TestDisplay"
-import EventCarousel from "./Carousel/Carousel"
-import {Carousel} from 'react-bootstrap'
-import openSocket from 'socket.io-client';
+import Carousel from './Carousel'
 
 class Landing extends React.Component{
 	constructor(props, context){
@@ -37,7 +35,6 @@ class Landing extends React.Component{
 		.then(res => res.json())
 		.then((data) => {
 			const events = data
-			console.log(events)
 			if(events.error){
 				this.setState({
 					error: events.error,
@@ -58,24 +55,11 @@ class Landing extends React.Component{
 		})	
 	}
 	render(){
-		/*
-			<Carousel interval = {null}>
-				{eventGrid}
-			</Carousel>
-		*/
-		// let eventGrid = this.state.events.map((event) => {
-		// 	return(
-		// 		<Carousel.Item>
-		// 			<div className = "card homepage-card">
-		// 				<TestDisplay event={event} userId={this.state.auth.user.id} /> 
-		// 			</div>
-		// 		</Carousel.Item>
-		// 	)
-		// })
+
 		let eventGrid = this.state.events.map((event) => {
 			return(
 				<div className = "card homepage-card">
-					<TestDisplay event={event} userId={this.state.auth.user.id} /> 
+					<TestDisplay key={event.id} event={event} userId={this.state.auth.user.id} /> 
 				</div>
 			)
 		})
@@ -93,7 +77,7 @@ class Landing extends React.Component{
 					<h2> Events Around me: </h2>
 				</div>
 				<div className="carousel-container">
-					{eventGrid}
+					<Carousel slides={eventGrid} />
 				</div>
 			</div>
 		)

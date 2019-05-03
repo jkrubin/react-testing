@@ -19,7 +19,7 @@ class MessageDisplay extends React.Component{
 							alt="" 
 							className="message-profile-pic" />
 					</div>
-					<div classNmae="profile-name">
+					<div className="profile-name">
 						{this.state.user.name}
 					</div>
 				</div>

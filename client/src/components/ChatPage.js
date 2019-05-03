@@ -89,11 +89,11 @@ class ChatPage extends React.Component{
 	render(){
 		let myEventDisplay = this.state.myEventArr.map((event) => {
 			return(
-				<div className = "chat-page">
+				<div key={event.id} className="chat-page">
 					<div>
 						<div className="chat-container">
 							<div className="event-row" >
-								<ChatEvent event={event} active={this.state.activeChat === event.id} toggleActiveChat={this.toggleActiveChat}/>
+								<ChatEvent key={event.id} event={event} active={this.state.activeChat === event.id} toggleActiveChat={this.toggleActiveChat}/>
 							</div>
 						</div>
 					</div>
@@ -102,11 +102,11 @@ class ChatPage extends React.Component{
 		})
 		let eventsDisplay = this.state.eventArr.map((event) => {
 			return(
-				<div className = "chat-page">
+				<div key={event.id} className="chat-page">
 					<div>
 						<div className="chat-container">
 							<div className="event-row" >
-								<ChatEvent event={event} active={this.state.activeChat === event.id} toggleActiveChat={this.toggleActiveChat} />
+								<ChatEvent key={event.id} event={event} active={this.state.activeChat === event.id} toggleActiveChat={this.toggleActiveChat} />
 							</div>
 						</div>
 					</div>
@@ -115,7 +115,7 @@ class ChatPage extends React.Component{
 		})
 		let myEventChatbox = this.state.myEventArr.map((event) => {
 			return(
-				<div className = "chat-page">
+				<div key={event.id} className="chat-page">
 					<ChatBox 
 						event= {event} 
 						userId= {this.state.auth.user.id} 
@@ -127,7 +127,7 @@ class ChatPage extends React.Component{
 		})
 		let eventsChatbox = this.state.eventArr.map((event) => {
 			return(
-				<div className = "chat-page">
+				<div key={event.id} className="chat-page">
 					<ChatBox 
 						event= {event} 
 						userId= {this.state.auth.user.id} 

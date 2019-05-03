@@ -1,8 +1,24 @@
+.App{
+	height: 100%;
+}
 div.error{
 	color:red;
 	text-align: center;
 }
+.logo-header{
+	width: 86px;
+	height: 86px;
+	overflow: hidden;
+	margin-right:10px;
 
+}
+.nav-right{
+	display: flex;
+}
+.logo-header img{
+	width: 100%;
+	height: auto;
+}
 /*
 	Dash page
 */
@@ -15,6 +31,12 @@ div.error{
 .dash-page .event-display {
 	position: relative;
 }
+.dash-page.event-card{
+	border-radius: 0px;
+}
+.dash-page .event-card{
+	overflow: hidden;
+}
 .auth-group button {
 	margin: 10px;
 }
@@ -26,7 +48,9 @@ div.card{
 	background-color: white;
 }
 div.landing-page{
-	background-color: #daefef;
+	background-color: #A2AAF7;
+	min-height: 100%;
+	height: auto;
 }
 .event-container{
 	display: flex;
@@ -98,9 +122,10 @@ div.col-md-auto{
 	height: 100vh;
 	max-height: 776px;
 	overflow: scroll;
+	overflow-x: hidden;
 }
 .dash-page{
-	background-color: #daefef;
+	background-color: #A2AAF7;
 }
 /*
 	Flip container
@@ -125,7 +150,9 @@ div.col-md-auto{
 	height: auto;
 	position: relative;
 }
-
+.dash-page .flipper{
+	max-height: 776px;
+}
 /* hide back of pane during swap */
 .front, .back {
 	backface-visibility: hidden;
@@ -153,9 +180,28 @@ div.col-md-auto{
 
 .event-bar{
 	position: absolute;
+	right: 17px;
+	top: 0;
+	border-radius: 0px 0px 8px 8px;
 	z-index: 3;
 	display: flex;
+	flex-direction: row-reverse;
 	align-content: space-between;
+	padding-right: 5px;
+	padding-left: 5px;
+	background-color: rgb(12, 78, 183, 0.7);
+}
+.event-bar button{
+	width: 45px;
+	height: 45px;
+	padding:0px;
+	margin:8px;
+	margin-top: 0px;
+
+}
+.event-bar button img{
+	width: auto;
+	height: 100%;
 }
 @media (max-width: 570px){
 	.front, .back {
@@ -264,8 +310,11 @@ button.event-revert, button.event-submit{
 .event-row{
     border: 1px solid;
     align-items: center;
-    background-color: #eddca6;
+    background-color: #FFD158;
     padding-bottom: 30px;
+}
+.dash-page .event-row{
+	height: 100%;
 }
 .event-info-container{
 	min-height: 100px
@@ -452,6 +501,7 @@ button.event-revert, button.event-submit{
 	flex-direction: column;
 	align-items: center;
 	padding-top: 15px;
+	border: 0px;
 }
 
 .user-modal .event-content-list{
@@ -515,10 +565,11 @@ button.event-revert, button.event-submit{
 }
 
 .homepage-card{
-	margin:5px;
+	margin:auto;
 	width:350px;
 	border-radius:20px;
 	overflow: hidden;
+	white-space: pre-wrap;
 }
 .homepage-card .card-body{
 	height: 500px;
