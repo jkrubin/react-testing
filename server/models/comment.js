@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const comment = sequelize.define('comment', {
     content: DataTypes.STRING,
-    date: DataTypes.Date,
+    date: DataTypes.DATE,
     week: DataTypes.INTEGER
   }, {});
   comment.associate = function(models) {
