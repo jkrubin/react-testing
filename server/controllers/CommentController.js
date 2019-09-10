@@ -17,7 +17,7 @@ module.exports = {
 			const{week} = req.body
 			const comments = await comment.findAll({
 				where: {week: week},
-				include: [{ model: users, as: 'user'}]
+				include: [{ model: users, as: 'users'}]
 			})
 			res.send({comments})
 		}catch(err){
