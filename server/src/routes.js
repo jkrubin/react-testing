@@ -3,6 +3,7 @@ const EventsController = require('../controllers/EventsController')
 const LikesController = require('../controllers/LikesController')
 const ChatController = require('../controllers/ChatController')
 const AuthenticationControllerPolicy = require('../policies/AuthenticationControllerPolicy')
+const CommentController = require('../controllers/CommentController')
 module.exports = (app, io) => {
 
 	app.get('/route', (req, res) => res.send('routes'))
@@ -64,4 +65,10 @@ module.exports = (app, io) => {
 		})
 		app.post('/deleteChat',
 			ChatController.deleteChat)		
+
+	//Comment endpoints
+		app.post('/createComment',
+			CommentController.createComment)
+		app.post('/getCommentByWeek',
+			CommentController.getCommentByWeek)
 }
