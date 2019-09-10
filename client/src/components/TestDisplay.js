@@ -149,6 +149,16 @@ class TestDisplay extends React.Component{
 						<div className="like-container">
 							{likeDisplay}
 						</div>
+						<div className="like-submit-container" style={this.state.submitLike? {maxHeight: "200px"}: {maxHeight: "0px"}} >
+							<div className="like-form-container">
+								<input name="likeMessage" 
+								type="text"
+								value={this.state.likeMessage}
+								onChange={this.handleChange}
+								/>
+								<button onClick={this.submitLike}> Send Like </button>
+							</div>
+						</div>
 						<div className="event-content-container">
 							<ul className="event-content-list">
 								<li className="event-name">
@@ -260,18 +270,6 @@ class TestDisplay extends React.Component{
 									</div>
 								</li>
 							</ul>
-							{this.state.submitLike &&
-								<div className="like-submit-container">
-									<div className="like-form-container">
-										<input name="likeMessage" 
-										type="text"
-										value={this.state.likeMessage}
-										onChange={this.handleChange}
-										/>
-										<button onClick={this.submitLike}> Send Like </button>
-									</div>
-								</div>
-							}
 						</div>
 					</div>
 				</div>

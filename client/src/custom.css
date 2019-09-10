@@ -22,9 +22,7 @@ div.error{
 /*
 	Dash page
 */
-.event-dash-container{
-	padding-bottom: 150px;
-}
+
 .auth-group {
 	display:flex;
 }
@@ -33,6 +31,9 @@ div.error{
 }
 .dash-page.event-card{
 	border-radius: 0px;
+}
+.event-content-list{
+	white-space: pre-wrap;
 }
 .dash-page .event-card{
 	overflow: hidden;
@@ -58,7 +59,8 @@ div.landing-page{
 	flex-direction: column;
 }
 div.event-card{
-	max-width: 450px;
+	width: 450px;
+	min-width: 100%;
 	height: auto;
 	border-radius: 25px;
 }
@@ -413,18 +415,19 @@ button.event-revert, button.event-submit{
 }
 .like-submit-container{
 	position:absolute;
+	top:90px;
+	z-index: 2;
 	display: flex;
 	flex-flow: column;
 	justify-content: space-around;
 	width: 300px;
-	height: 200px;
+	height: 100px;
 	background: rgb(136, 139, 145, .5);
-	border-radius: 10%;
-	border: 2px solid black;
+	border-radius: 15px;
+	transition: 0.5s;
+	overflow: hidden;
 }
-.like-form-container{
 
-}
 .border-container{
 	width: 0px;
 	flex: auto;
