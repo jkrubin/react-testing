@@ -35,7 +35,7 @@ module.exports = {
 			}
 
 			Object.keys(avgRank).forEach((key)=>{
-				rankingRes.ranking.push(
+				rankRes.ranking.push(
 					users.findOne({
 						where: {
 							id: key
@@ -47,7 +47,7 @@ module.exports = {
 					})
 				)
 			})
-			Promise.all(rankingRes.ranking).then(()=>{
+			Promise.all(rankRes.ranking).then(()=>{
 				rankRes.ranking.sort((a,b) =>{return b.rank - a.rank})
 				console.log(rankRes)
 				return res.send({rankRes})
