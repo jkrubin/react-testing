@@ -41,16 +41,17 @@ module.exports = {
 							id: key
 						}
 					}).then((user)=>{
-						return {user: user.toJSON(), rank: avgRank[key]}
+						if(user){
+							return {user: user.toJSON(), rank: avgRank[key]}
+						}
 					}).catch ((error) =>{
 						console.log(error)
 					})
 				)
 			})
-			Promise.all(rankRes.ranking).then(()=>{
-				rankRes.ranking = rankRes.ranking.map((obj)=>{
-					return obj.fulfillmentValue
-				})
+			Promise.all(rankRes.ranking).then((resolved)=>{
+				console.log({resolved})
+				rankRes.ranking = resolved
 				rankRes.ranking.sort((a,b) =>{return b.rank - a.rank})
 				console.log(rankRes)
 				return res.send({rankRes})
