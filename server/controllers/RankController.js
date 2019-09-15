@@ -14,11 +14,11 @@ module.exports = {
 		}
 	},
 	async getRankedUsers(req, res){
-			const users = await rank.findAll({
+			const userArr = await users.findAll({
 				where: {email: { like: '%fantasy.app%'}},
 				attributes:['id','name', 'bio', 'mimeType']
 			})	
-			return res.send({users})	
+			return res.send({userArr})	
 	}
 	async getRankByWeek(req, res) {
 		try{
