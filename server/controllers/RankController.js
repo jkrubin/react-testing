@@ -1,5 +1,6 @@
 const {users, rank} = require('../models')
 
+
 module.exports = {
 	async createRank(req, res) {
 		try{
@@ -33,22 +34,24 @@ module.exports = {
 				})
 			}
 
-			Object.keys(avgRank).forEach(async (key)=>{
-				const user = await users.findOne({
-					where: {
-						id: key
-					}
-				})
-				if(user) {
-					rankRes.ranking.push({user: user.toJSON(), rank: avgRank[key]})
-					console.log(rankRes.ranking)
-				}else{
-					console.log("404")
-				}
+			Object.keys(avgRank).forEach((key)=>{
+				rankingRes.ranking.push(
+					users.findOne({
+						where: {
+							id: key
+						}
+					}).then((user)=>{
+						return {user: user.toJSON(), rank: avgRank[key]}
+					}).catch ((error) =>{
+						console.log(error)
+					})
+				)
 			})
-			//rankRes.ranking.sort((a,b) =>{return b.rank - a.rank})
-			console.log(rankRes)
-			res.send({rankRes})
+			Promise.all(rankingRes.ranking).then(()=>{
+				rankRes.ranking.sort((a,b) =>{return b.rank - a.rank})
+				console.log(rankRes)
+				return res.send({rankRes})
+			})
 		}catch(err){
 			console.log(err)
 			res.status(500).send({
