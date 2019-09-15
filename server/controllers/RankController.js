@@ -33,12 +33,12 @@ module.exports = {
 					rankRes.push(
 						users.findOne({
 							where: {
-								id: key
+								id: ranking[key]
 							},
 							attributes:['id','name', 'bio', 'mimeType']
 						}).then((user)=>{
 							if(user){
-								return {user: user.toJSON(), rank: ranking[key]}
+								return {user: user.toJSON(), rank: key}
 							}
 						}).catch ((error) =>{
 							console.log(error)
