@@ -20,7 +20,7 @@ module.exports = {
 				include: [{ model: users, as: 'users'}]
 			})
 			let avgRank = {}
-			for(let i = 0; i < ranks.length; ranks++){
+			for(let i = 0; i < ranks.length; i++){
 				let ranking = JSON.parse(ranks[i].content)
 				Object.keys(ranking).forEach((key) =>{
 					let pts = (12 - key)
