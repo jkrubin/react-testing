@@ -47,7 +47,7 @@ module.exports = {
 				})
 				Promise.all(rankRes).then((resolved)=>{
 					rankRes = resolved
-					rankRes.sort((a,b) =>{return b.rank - a.rank})
+					rankRes.sort((a,b) =>{return a.rank - b.rank})
 					return res.send({rankRes})
 				})
 			}else{
