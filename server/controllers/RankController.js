@@ -27,7 +27,29 @@ module.exports = {
 				where: {week: week, userId: userId}
 			})
 			if(ballot){
-				return res.send({ballot})
+				let rankRes = []
+				let ranking = JSON.parse(ballot.content)
+				Object.keys(ranking).forEach((key)=>{
+					rankRes.push(
+						users.findOne({
+							where: {
+								id: key
+							},
+							attributes:['id','name', 'bio', 'mimeType']
+						}).then((user)=>{
+							if(user){
+								return {user: user.toJSON(), rank: ranking[key]}
+							}
+						}).catch ((error) =>{
+							console.log(error)
+						})
+					)
+				})
+				Promise.all(rankRes).then((resolved)=>{
+					rankRes = resolved
+					rankRes.sort((a,b) =>{return b.rank - a.rank})
+					return res.send({rankRes})
+				})
 			}else{
 				return res.send(false)
 			}
