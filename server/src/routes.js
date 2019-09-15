@@ -79,4 +79,6 @@ module.exports = (app, io) => {
 			RankController.getRankByWeek)
 		app.get('/getRankedUsers',
 			RankController.getRankedUsers)
+		app.post('/haveIVoted',
+			RankController.haveIVoted)
 }

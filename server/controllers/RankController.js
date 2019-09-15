@@ -4,12 +4,37 @@ const {users, rank} = require('../models')
 module.exports = {
 	async createRank(req, res) {
 		try{
+			const {week, userId} = req.body
+			const ballot = await rank.findOne({
+				where: {week: week, userId: userId}
+			})
+			if(ballot){
+				return res.status(500).send({error: "you already voted"})
+			}
 			const newrank = await rank.create(req.body)
 			res.send({rank: newrank})
 		}catch(err){
 			console.log(err)
 			res.status(400).send({
 				error: "Server error creating rank"
+			})
+		}
+	},
+	async haveIVoted(req, res){
+		try{
+			const {week, userId} = req.body
+			const ballot = await rank.findOne({
+				where: {week: week, userId: userId}
+			})
+			if(ballot){
+				return res.send({ballot})
+			}else{
+				return res.send(false)
+			}
+		}catch(err){
+			console.log(err)
+			res.status(400).send({
+				error: "Server error finding ballot rank"
 			})
 		}
 	},
