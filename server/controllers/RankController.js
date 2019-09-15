@@ -48,6 +48,9 @@ module.exports = {
 				)
 			})
 			Promise.all(rankRes.ranking).then(()=>{
+				rankRes.ranking = rankRes.ranking.map((obj)=>{
+					return obj.fulfillmentValue
+				})
 				rankRes.ranking.sort((a,b) =>{return b.rank - a.rank})
 				console.log(rankRes)
 				return res.send({rankRes})
