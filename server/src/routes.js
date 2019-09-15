@@ -4,6 +4,7 @@ const LikesController = require('../controllers/LikesController')
 const ChatController = require('../controllers/ChatController')
 const AuthenticationControllerPolicy = require('../policies/AuthenticationControllerPolicy')
 const CommentController = require('../controllers/CommentController')
+const RankController = require('../controllers/RankController')
 module.exports = (app, io) => {
 
 	app.get('/route', (req, res) => res.send('routes'))
@@ -71,4 +72,9 @@ module.exports = (app, io) => {
 			CommentController.createComment)
 		app.post('/getCommentByWeek',
 			CommentController.getCommentByWeek)
+	//Rank endpoints
+		app.post('/createRank',
+			RankController.createRank)
+		app.post('/getRankByWeek',
+			RankController.getRankByWeek)
 }
