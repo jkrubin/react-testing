@@ -46,7 +46,8 @@ module.exports = {
 					users.findOne({
 						where: {
 							id: key
-						}
+						},
+						attributes:['id','name', 'bio', 'mimeType']
 					}).then((user)=>{
 						if(user){
 							return {user: user.toJSON(), rank: avgRank[key]}
