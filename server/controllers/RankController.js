@@ -21,12 +21,13 @@ module.exports = {
 			})
 			let avgRank = {}
 			for(let i = 0; i < ranks.length; ranks++){
-				Object.keys(ranks[i]).forEach((key) =>{
+				let ranking = JSON.parse(ranks[i].content)
+				Object.keys(ranking).forEach((key) =>{
 					let pts = (12 - key)
-					if(avgRank[ranks[i][key]]){
-						avgRank[ranks[i][key]] += pts
+					if(avgRank[ranking[key]]){
+						avgRank[ranking[key]] += pts
 					}else{
-						avgRank[ranks[i][key]] = pts
+						avgRank[ranking[key]] = pts
 					}
 				})
 			}
