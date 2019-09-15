@@ -48,10 +48,14 @@ module.exports = {
 				Promise.all(rankRes).then((resolved)=>{
 					rankRes = resolved
 					rankRes.sort((a,b) =>{return a.rank - b.rank})
-					return res.send({rankRes})
+					return res.send({ballot:true, rankRes})
 				})
 			}else{
-				return res.send(false)
+				const userArr = await users.findAll({
+				where: {email: { like: '%fantasy.app%'}},
+				attributes:['id','name', 'bio', 'mimeType']
+			})	
+			return res.send({ballot:false, userArr})	
 			}
 		}catch(err){
 			console.log(err)
