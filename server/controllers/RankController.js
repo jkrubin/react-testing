@@ -19,7 +19,7 @@ module.exports = {
 				attributes:['id','name', 'bio', 'mimeType']
 			})	
 			return res.send({users})	
-	}
+	},
 	async getRankByWeek(req, res) {
 		try{
 			const{week} = req.body
@@ -57,10 +57,8 @@ module.exports = {
 				)
 			})
 			Promise.all(rankRes.ranking).then((resolved)=>{
-				console.log({resolved})
 				rankRes.ranking = resolved
 				rankRes.ranking.sort((a,b) =>{return b.rank - a.rank})
-				console.log(rankRes)
 				return res.send({rankRes})
 			})
 		}catch(err){
