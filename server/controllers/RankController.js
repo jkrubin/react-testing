@@ -32,7 +32,8 @@ module.exports = {
 					}
 				})
 			}
-			Object.keys(avgRank).forEach((key)=>{
+
+			Object.keys(avgRank).forEach(async (key)=>{
 				const user = await users.findOne({
 					where: {
 						id: key
@@ -40,9 +41,13 @@ module.exports = {
 				})
 				if(user) {
 					rankRes.ranking.push({user: user.toJSON(), rank: avgRank[key]})
+					console.log(rankRes.ranking)
+				}else{
+					console.log("404")
 				}
 			})
-			rankRes.ranking.sort((a,b) =>{return b.rank - a.rank})
+			//rankRes.ranking.sort((a,b) =>{return b.rank - a.rank})
+			console.log(rankRes)
 			res.send({rankRes})
 		}catch(err){
 			console.log(err)
