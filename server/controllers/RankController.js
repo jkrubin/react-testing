@@ -20,6 +20,7 @@ module.exports = {
 				include: [{ model: users, as: 'users'}]
 			})
 			let avgRank = {}
+			let rankRes = {"week": week, ranking: []}
 			for(let i = 0; i < ranks.length; i++){
 				let ranking = JSON.parse(ranks[i].content)
 				Object.keys(ranking).forEach((key) =>{
@@ -31,7 +32,18 @@ module.exports = {
 					}
 				})
 			}
-			res.send({avgRank})
+			Object.keys(avgRank).forEach((key)=>{
+				const user = await users.findOne({
+					where: {
+						id: key
+					}
+				})
+				if(user) {
+					rankRes.ranking.push({user: user.toJSON(), rank: avgRank[key]})
+				}
+			})
+			rankRes.ranking.sort((a,b) =>{return b.rank - a.rank})
+			res.send({rankRes})
 		}catch(err){
 			console.log(err)
 			res.status(500).send({
